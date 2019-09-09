@@ -10,7 +10,7 @@ class AssignedTask {
   int user_id;
 
   AssignedTask(
-      {this.id = 0,
+      {this.id,
       this.task_name,
       this.description,
       this.latitude,
@@ -32,12 +32,10 @@ class AssignedTask {
 
   Map<String, dynamic> toJson() {
     return {
-      "id": id,
       "task_name": task_name,
       "description": description,
       "latitude": latitude,
       "longitude": longitude,
-      "status": status,
       "user_id": user_id
     };
   }

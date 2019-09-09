@@ -56,13 +56,43 @@ class CallApi {
     }
   }
 
+  // Create task
   Future<bool> createTask(AssignedTask data) async {
+    print(assignedTaskToJson(data));
     final response = await client.post(
-      "$baseurl/api/task",
+      "http://10.0.2.2:8000/api/task",
       headers: {"content-type": "application/json"},
       body: assignedTaskToJson(data),
     );
+    print(response.statusCode);
     if (response.statusCode == 201) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  // Update Task
+  Future<bool> updateTask(AssignedTask data) async {
+    final response = await client.put(
+      "$baseurl/api/task/${data.id}",
+      headers: {"content-type": "application/json"},
+      body: assignedTaskToJson(data),
+    );
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  // Delete Task
+  Future<bool> deleteTask(int id) async {
+    final response = await client.delete(
+      "$baseurl/api/task/$id",
+      headers: {"content-type": "application/json"},
+    );
+    if (response.statusCode == 200) {
       return true;
     } else {
       return false;

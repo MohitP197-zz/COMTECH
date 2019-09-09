@@ -5,8 +5,8 @@ import 'package:gdgbloc/src/ui/homepage/homescreen/taskscreen/model/task_model.d
 final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
 
 class AddTaskScreen extends StatefulWidget {
-  // AssignedTask assignedTask;
-  // AddTaskScreen({this.assignedTask});
+  AssignedTask assignedTask;
+  AddTaskScreen({this.assignedTask});
 
   @override
   _AddTaskScreenState createState() => _AddTaskScreenState();
@@ -27,24 +27,26 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   TextEditingController _controllerLongitude = TextEditingController();
   TextEditingController _controllerUserId = TextEditingController();
 
-  // @override
-  // void initState(){
-  //   if(widget . assignedTask != null){
-  //     _isFieldTaskValid = true;
-  //     _controllerTask.text = widget.assignedTask.task_name;
+  @override
+  void initState() {
+    if (widget.assignedTask != null) {
+      _isFieldTaskValid = true;
+      _controllerTask.text = widget.assignedTask.task_name;
 
-  //     _isFieldDescriptionValid = true;
-  //     _controllerDescription.text = widget.assignedTask.description;
+      _isFieldDescriptionValid = true;
+      _controllerDescription.text = widget.assignedTask.description;
 
-  //     _isFieldLocationValid = true;
-  //     _controllerLocation.text = widget.assignedTask.location;
+      _isFieldLatitudeValid = true;
+      _controllerLatitude.text = widget.assignedTask.latitude;
 
-  //     _isFieldUserIdValid = true;
-  //     _controllerUserId.text = widget.assignedTask.user_id.toString();
+      _isFieldLongitudeValid = true;
+      _controllerLongitude.text = widget.assignedTask.longitude;
 
-  //   }
-  //   super.initState();
-  // }
+      _isFieldUserIdValid = true;
+      _controllerUserId.text = widget.assignedTask.user_id.toString();
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +62,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
           backgroundColor: Colors.grey,
           iconTheme: IconThemeData(color: Colors.white),
           title: Text(
-            "Add Task",
+            widget.assignedTask == null ? "Add Task" : "Edit Task Details",
             style: app,
           ),
           centerTitle: true,
@@ -80,7 +82,11 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 SizedBox(
                   height: 8.0,
                 ),
-                _buildTextFieldLocation(),
+                _buildTextFieldLatitude(),
+                SizedBox(
+                  height: 8.0,
+                ),
+                _buildTextFieldLongitude(),
                 SizedBox(
                   height: 8.0,
                 ),
@@ -121,6 +127,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                           latitude: latitude,
                           longitude: longitude,
                           user_id: user_id);
+
+                      // print(assignedTask);
 
                       _apiService.createTask(assignedTask).then((isSuccess) {
                         setState(() => _isLoading = false);
@@ -206,21 +214,41 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     );
   }
 
-  Widget _buildTextFieldLocation() {
+  Widget _buildTextFieldLatitude() {
     return TextField(
       controller: _controllerLatitude,
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(18.0)),
-        labelText: "Location",
+        labelText: "Latitude",
         errorText: _isFieldLatitudeValid == null || _isFieldLatitudeValid
             ? null
-            : "Age is required",
+            : "Latitude is required",
       ),
       onChanged: (value) {
         bool isFieldValid = value.trim().isNotEmpty;
         if (isFieldValid != _isFieldLatitudeValid) {
           setState(() => _isFieldLatitudeValid = isFieldValid);
+        }
+      },
+    );
+  }
+
+  Widget _buildTextFieldLongitude() {
+    return TextField(
+      controller: _controllerLongitude,
+      keyboardType: TextInputType.text,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(18.0)),
+        labelText: "Longitude",
+        errorText: _isFieldLongitudeValid == null || _isFieldLongitudeValid
+            ? null
+            : "Longitude is Required",
+      ),
+      onChanged: (value) {
+        bool isFieldValid = value.trim().isNotEmpty;
+        if (isFieldValid != _isFieldLongitudeValid) {
+          setState(() => _isFieldLongitudeValid = isFieldValid);
         }
       },
     );

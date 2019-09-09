@@ -79,7 +79,10 @@ class CallApi {
       headers: {"content-type": "application/json"},
       body: assignedTaskToJson(data),
     );
+    print(assignedTaskToJson(data));
+    print(response.statusCode);
     if (response.statusCode == 200) {
+      print(response.statusCode);
       return true;
     } else {
       return false;

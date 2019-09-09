@@ -89,9 +89,9 @@ class _TaskDetailsState extends State<TaskDetails> {
                       style: Theme.of(context).textTheme.title,
                     ),
                     Text(assignedTask.description),
-                    Text(assignedTask.latitude),
-                    Text(assignedTask.longitude),
-                    Text(assignedTask.longitude),
+                    // Text(assignedTask.latitude),
+                    // Text(assignedTask.longitude),
+                    // Text(assignedTask.longitude),
                     Text(assignedTask.category),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,

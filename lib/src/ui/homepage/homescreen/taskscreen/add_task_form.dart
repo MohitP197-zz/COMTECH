@@ -127,8 +127,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       String task_name = _controllerTask.text.toString();
                       String description =
                           _controllerDescription.text.toString();
-                      String category =
-                          _controllerCategory.text.toString();
+                      String category = _controllerCategory.text.toString();
                       String latitude = _controllerLatitude.text.toString();
                       String longitude = _controllerLongitude.text.toString();
                       int user_id =
@@ -143,17 +142,31 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                           user_id: user_id);
 
                       // print(assignedTask);
-
-                      _apiService.createTask(assignedTask).then((isSuccess) {
-                        setState(() => _isLoading = false);
-                        if (isSuccess) {
-                          Navigator.pop(_scaffoldState.currentState.context);
-                        } else {
-                          _scaffoldState.currentState.showSnackBar(SnackBar(
-                            content: Text('Submit data failed'),
-                          ));
-                        }
-                      });
+                      if (widget.assignedTask == null) {
+                        _apiService.createTask(assignedTask).then((isSuccess) {
+                          setState(() => _isLoading = false);
+                          if (isSuccess) {
+                            Navigator.pop(_scaffoldState.currentState.context);
+                          } else {
+                            _scaffoldState.currentState.showSnackBar(SnackBar(
+                              content: Text('Submit data failed'),
+                            ));
+                          }
+                        });
+                      } else {
+                        assignedTask.id = widget.assignedTask.id;
+                        _apiService.updateTask(assignedTask).then((isSuccess) {
+                          setState(() => _isLoading = false);
+                          print(isSuccess);
+                          if (!isSuccess) {
+                            Navigator.pop(_scaffoldState.currentState.context);
+                          } else {
+                            _scaffoldState.currentState.showSnackBar(SnackBar(
+                              content: Text("Update data failed"),
+                            ));
+                          }
+                        });
+                      }
                     },
                     child: Text(
                       "Submit".toUpperCase(),
@@ -207,7 +220,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       },
     );
   }
-  
 
   Widget _buildTextFieldDescription() {
     return TextField(
@@ -229,7 +241,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     );
   }
 
-   Widget _buildTextFieldCategory() {
+  Widget _buildTextFieldCategory() {
     return TextField(
       controller: _controllerCategory,
       keyboardType: TextInputType.text,

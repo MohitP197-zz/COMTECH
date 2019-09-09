@@ -2,18 +2,19 @@ import 'dart:convert';
 
 class FeedBackModel { 
   int id; 
-  String name; 
-  String feedb; 
+  String title;
+  String user_name; 
+  String description; 
 
-  FeedBackModel ({ this .id = 0, this. name, this. feedb,}); 
+  FeedBackModel ({ this .id = 0, this.title,this.user_name, this.description}); 
 
   factory FeedBackModel.fromJson (Map <String, dynamic > map) { 
     return FeedBackModel ( 
-        id: map ["id"], name: map ["name"], feedb: map ["feedb"]); 
+        id: map ["id"], title: map ["title"], user_name: map ["user_name"], description: map ["description"]); 
   } 
 
   Map <String, dynamic > toJson () { 
-    return {"id": id, "name": name, "feedb":feedb};
+    return {"id": id, "title": title, "user_name": user_name, "description":description};
 
     // return 'Profile {id: $ id, name: $ name, email: $ email, age: $ age}'; 
   } 

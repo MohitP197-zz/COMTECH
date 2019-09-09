@@ -14,9 +14,11 @@ class _FeedBackState extends State<FeedBack> {
   bool _isLoading = false;
   CallApi _apifeed = CallApi();
 
+  bool _isFieldTitleValid;
   bool _isFieldNameValid;
   bool _isFieldFeedBackValid;
 
+  TextEditingController _controllerTitle = TextEditingController();
   TextEditingController _controllerName = TextEditingController();
   TextEditingController _controllerFeedBack = TextEditingController();
 
@@ -46,6 +48,10 @@ class _FeedBackState extends State<FeedBack> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
+                _buildTitleFieldName(),
+                SizedBox(
+                  height: 20.0,
+                ),
                 _buildTextFieldName(),
                 SizedBox(
                   height: 20.0,
@@ -59,9 +65,11 @@ class _FeedBackState extends State<FeedBack> {
                   child: RaisedButton(
                     onPressed: () {
                       if (_isFieldNameValid == null ||
+                          _isFieldTitleValid == null ||
                           _isFieldFeedBackValid == null ||
                           !_isFieldNameValid ||
-                          !_isFieldFeedBackValid) {
+                          !_isFieldFeedBackValid ||
+                          !_isFieldTitleValid) {
                         _scaffoldState.currentState.showSnackBar(SnackBar(
                           content: Text("Please all the fields"),
                         ));
@@ -70,11 +78,12 @@ class _FeedBackState extends State<FeedBack> {
 
                       setState(() => _isLoading = true);
 
+                      String title = _controllerTitle.text.toString();
                       String name = _controllerName.text.toString();
-                      String feedb = _controllerFeedBack.text.toString();
+                      String description = _controllerFeedBack.text.toString();
 
                       FeedBackModel feed =
-                          FeedBackModel(name: name, feedb: feedb);
+                          FeedBackModel(title: title, user_name: name, description: description);
                       _apifeed.createFeedBack(feed).then((isSuccess) {
                         setState(() => _isLoading = false);
                         if (isSuccess) {
@@ -114,6 +123,28 @@ class _FeedBackState extends State<FeedBack> {
               : Container(),
         ],
       ),
+    );
+  }
+
+  Widget _buildTitleFieldName() {
+    return TextField(
+      controller: _controllerTitle,
+      keyboardType: TextInputType.text,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(18.0)),
+        labelText: "Title",
+        errorText: _isFieldTitleValid == null || _isFieldTitleValid
+            ? null
+            : "Full name is required",
+      ),
+      onChanged: (value) {
+        bool isFieldValid = value.trim().isNotEmpty;
+        if (isFieldValid != _isFieldTitleValid) {
+          setState(() {
+            _isFieldTitleValid = isFieldValid;
+          });
+        }
+      },
     );
   }
 

@@ -17,12 +17,14 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   CallApi _apiService = CallApi();
   bool _isFieldTaskValid;
   bool _isFieldDescriptionValid;
+  bool _isFieldCategoryValid;
   bool _isFieldLatitudeValid;
   bool _isFieldLongitudeValid;
   bool _isFieldUserIdValid;
 
   TextEditingController _controllerTask = TextEditingController();
   TextEditingController _controllerDescription = TextEditingController();
+  TextEditingController _controllerCategory = TextEditingController();
   TextEditingController _controllerLatitude = TextEditingController();
   TextEditingController _controllerLongitude = TextEditingController();
   TextEditingController _controllerUserId = TextEditingController();
@@ -35,6 +37,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
       _isFieldDescriptionValid = true;
       _controllerDescription.text = widget.assignedTask.description;
+
+      _isFieldCategoryValid = true;
+      _controllerCategory.text = widget.assignedTask.category;
 
       _isFieldLatitudeValid = true;
       _controllerLatitude.text = widget.assignedTask.latitude;
@@ -69,7 +74,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
         ),
         body: Stack(children: <Widget>[
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(20.0),
             child: ListView(
               // mainAxisSize: MainAxisSize.min,
               // crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -79,6 +84,10 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   height: 8.0,
                 ),
                 _buildTextFieldDescription(),
+                SizedBox(
+                  height: 8.0,
+                ),
+                _buildTextFieldCategory(),
                 SizedBox(
                   height: 8.0,
                 ),
@@ -97,11 +106,13 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     onPressed: () {
                       if (_isFieldTaskValid == null ||
                           _isFieldDescriptionValid == null ||
+                          _isFieldCategoryValid == null ||
                           _isFieldLatitudeValid == null ||
                           _isFieldLongitudeValid == null ||
                           _isFieldUserIdValid == null ||
                           !_isFieldTaskValid ||
                           !_isFieldDescriptionValid ||
+                          !_isFieldCategoryValid ||
                           !_isFieldLatitudeValid ||
                           !_isFieldLongitudeValid ||
                           !_isFieldUserIdValid) {
@@ -116,6 +127,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       String task_name = _controllerTask.text.toString();
                       String description =
                           _controllerDescription.text.toString();
+                      String category =
+                          _controllerCategory.text.toString();
                       String latitude = _controllerLatitude.text.toString();
                       String longitude = _controllerLongitude.text.toString();
                       int user_id =
@@ -124,6 +137,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       AssignedTask assignedTask = AssignedTask(
                           task_name: task_name,
                           description: description,
+                          category: category,
                           latitude: latitude,
                           longitude: longitude,
                           user_id: user_id);
@@ -193,6 +207,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       },
     );
   }
+  
 
   Widget _buildTextFieldDescription() {
     return TextField(
@@ -209,6 +224,26 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
         bool isFieldValid = value.trim().isNotEmpty;
         if (isFieldValid != _isFieldDescriptionValid) {
           setState(() => _isFieldDescriptionValid = isFieldValid);
+        }
+      },
+    );
+  }
+
+   Widget _buildTextFieldCategory() {
+    return TextField(
+      controller: _controllerCategory,
+      keyboardType: TextInputType.text,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(18.0)),
+        labelText: "Category",
+        errorText: _isFieldCategoryValid == null || _isFieldCategoryValid
+            ? null
+            : "Description is required",
+      ),
+      onChanged: (value) {
+        bool isFieldValid = value.trim().isNotEmpty;
+        if (isFieldValid != _isFieldCategoryValid) {
+          setState(() => _isFieldCategoryValid = isFieldValid);
         }
       },
     );

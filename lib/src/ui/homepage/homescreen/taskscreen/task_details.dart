@@ -92,6 +92,7 @@ class _TaskDetailsState extends State<TaskDetails> {
                     Text(assignedTask.latitude),
                     Text(assignedTask.longitude),
                     Text(assignedTask.longitude),
+                    Text(assignedTask.category),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[

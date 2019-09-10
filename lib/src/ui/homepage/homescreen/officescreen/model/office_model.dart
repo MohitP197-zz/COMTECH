@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class Office{
+class Office {
   int id;
   String office_name;
   String description;
@@ -8,9 +8,15 @@ class Office{
   int task_id;
   int user_id;
 
-  Office({this.id, this.office_name, this.description, this.location, this.task_id, this.user_id});
+  Office(
+      {this.id,
+      this.office_name,
+      this.description,
+      this.location,
+      this.task_id,
+      this.user_id});
 
-  factory Office.fromJson (Map<String, dynamic> map){
+  factory Office.fromJson(Map<String, dynamic> map) {
     return Office(
       id: map["id"],
       office_name: map["office_name"],
@@ -21,19 +27,30 @@ class Office{
     );
   }
 
-  Map<String, dynamic> toJson(){
-    return {"id":id, "office_name":office_name, "description":description,"location":location,"task_id":task_id,"user_id":user_id};
+  Map<String, dynamic> toJson() {
+    return {
+      "id": id,
+      "office_name": office_name,
+      "description": description,
+      "location": location,
+      "task_id": task_id,
+      "user_id": user_id
+    };
+  }
 
-    // return 'Office {id:$id, office_name:$office_name, description:$description,location:$location,task_id:$task_id,user_id:$user_id}';
+  @override
+  String toString() {
+    return 'Office{id: $id, office_name: $office_name, description: $description, location: $location, task_id: $task_id,user_id: $user_id}';
   }
 }
 
-List<Office> officeFromJson(String jsonData){
-  final officedata = json.decode(jsonData);
-  return List<Office>.from(officedata.map ((item) => Office.fromJson(item)));
+List<Office> officeFromJson(String jsonData) {
+  final officeData = json.decode(jsonData);
+  return List<Office>.from(
+      officeData.map((item) => Office.fromJson(item)));
 }
 
-String officeToJson(Office data){
-  final officeData = data.toJson();
-  return json.encode(officeData);
+String officeToJson(Office officeData) {
+  final jsonData = officeData.toJson();
+  return json.encode(jsonData);
 }

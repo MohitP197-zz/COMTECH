@@ -113,6 +113,52 @@ class CallApi {
     }
   }
 
+  // Create task
+  Future<bool> createOffice(Office data) async {
+    print(officeToJson(data));
+    final response = await client.post(
+      "http://10.0.2.2:8000/api/office",
+      headers: {"content-type": "application/json"},
+      body: officeToJson(data),
+    );
+    print(response.statusCode);
+    if (response.statusCode == 201) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  // Update Task
+  Future<bool> updateOffice(Office data) async {
+    final response = await client.put(
+      "$baseurl/api/office/${data.id}",
+      headers: {"content-type": "application/json"},
+      body: officeToJson(data),
+    );
+    print(officeToJson(data));
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      print(response.statusCode);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  // Delete Task
+  Future<bool> deleteOffice(int id) async {
+    final response = await client.delete(
+      "$baseurl/api/office/$id",
+      headers: {"content-type": "application/json"},
+    );
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   Future<bool> createFeedBack(FeedBackModel feed) async {
     final response = await client.post(
       "$baseurl/api/feedback",

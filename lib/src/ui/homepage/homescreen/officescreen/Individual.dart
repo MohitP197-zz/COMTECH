@@ -1,72 +1,28 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:gdgbloc/src/ui/homepage/homescreen/taskscreen/model/task_model.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+import 'model/office_model.dart';
 // import 'package:gdgbloc/src/ui/homepage/homescreen/taskscreen/model/task_model.dart';
 
-class Individuals extends StatefulWidget {
-  final AssignedTask assignedTask;
-  // final String latitude;
+class Individual extends StatefulWidget {
+  final Office office;
 
-  Individuals(this.assignedTask);
-  // const Individuals({Key key, this.assignedTask}) : super(key: key);
-  // final AssignedTask assignedTask;
-  // Individuals({Key key, this.assignedTask}) : super(key: key);
+  Individual(this.office);
   @override
-  _IndividualsState createState() =>
-      _IndividualsState(assignedTask: this.assignedTask);
+  _IndividualState createState() =>
+      _IndividualState(office);
 }
 
-class _IndividualsState extends State<Individuals> {
-  final AssignedTask assignedTask;
-  Completer<GoogleMapController> _controller = Completer();
+class _IndividualState extends State<Individual> {
+  final Office office;
+  _IndividualState(this.office);
 
-  // var latitude = assignedTask.latitude as double;
-  // var longitude = assignedTask.longitude as double;
-  // final LatLng _center = LatLng(latitude, longitude);
-  List<Marker> allMarkers = [];
-  GoogleMapController mapController;
-  void _onMapCreated(GoogleMapController controller) {
-    _controller.complete(controller);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    allMarkers.add(Marker(
-        markerId: MarkerId('myMarker'),
-        // draggable: true,
-        onTap: () {
-          print('Marker Tapped');
-        },
-        position: LatLng(double.parse(assignedTask.latitude),
-            double.parse(assignedTask.longitude))));
-  }
-
-  _IndividualsState({this.assignedTask});
   @override
   Widget build(BuildContext context) {
-    var latitude = double.parse(assignedTask.latitude);
-    var longitude = double.parse(assignedTask.longitude);
-    // double latitudes = latitude.toDouble();
-    // double longitudes = longitude.toDouble();
-    double latitudes = latitude + .0;
-    double longitudes = longitude + .0;
-
-    Color determineColor() {
-      if (assignedTask.status == "Not Complete") {
-        return Colors.red;
-      } else {
-        return Colors.green;
-      }
-    }
-
     final topContentText = Column(
       // crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          assignedTask.task_name,
+          office.office_name,
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.black, fontSize: 22.0),
         ),
@@ -86,7 +42,7 @@ class _IndividualsState extends State<Individuals> {
                 child: Padding(
                     padding: EdgeInsets.only(left: 1.0),
                     child: Text(
-                      assignedTask.user_id.toString(),
+                      office.user_id.toString(),
                       style: TextStyle(color: Colors.red, fontSize: 17),
                     ))),
             Expanded(
@@ -98,13 +54,6 @@ class _IndividualsState extends State<Individuals> {
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.black),
                         borderRadius: BorderRadius.circular(5.0),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.only(left: 10.0),
-                        child: Text(
-                          assignedTask.status,
-                          style: TextStyle(color: determineColor()),
-                        ),
                       ),
                     )))
           ],
@@ -130,22 +79,10 @@ class _IndividualsState extends State<Individuals> {
         ),
       ],
     );
-    final bottomContentMap = Container(
-      // height: MediaQuery.of(context).size.height * 0.5,
-      height: MediaQuery.of(context).size.height * 0.3,
-      width: MediaQuery.of(context).size.width,
-      child: GoogleMap(
-        onMapCreated: _onMapCreated,
-        markers: Set.from(allMarkers),
-        initialCameraPosition: CameraPosition(
-          target: LatLng(latitudes, longitudes),
-          zoom: 16.0,
-        ),
-      ),
-    );
+   
 
     final bottomContentText = Text(
-      assignedTask.description,
+      office.description,
       style: TextStyle(fontSize: 18.0),
     );
     final bottomContent = Container(
@@ -158,7 +95,6 @@ class _IndividualsState extends State<Individuals> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              bottomContentMap,
               SizedBox(
                 height: 15.0,
               ),
@@ -194,4 +130,6 @@ class _IndividualsState extends State<Individuals> {
       ),
     );
   }
+
+ 
 }

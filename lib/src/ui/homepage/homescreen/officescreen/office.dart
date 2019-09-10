@@ -33,6 +33,15 @@ class _OfficeScreenState extends State<OfficeScreen> {
           style: app,
         ),
         centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add),
+            // onPressed: _addTask,
+            onPressed: () {
+              Navigator.pushNamed(context, "/AddOfficeScreen");
+            },
+          )
+        ],
       ),
       // floatingActionButton: FloatingActionButton(
       //   onPressed: () {},
@@ -85,7 +94,7 @@ class _OfficeScreenState extends State<OfficeScreen> {
                       children: <Widget>[
                         FlatButton(
                           onPressed: () {
-                            _getTaskDetails(context, office);
+                            _getOfficeDetails(context, office);
                           },
                           child: Text(
                             "View",
@@ -103,7 +112,7 @@ class _OfficeScreenState extends State<OfficeScreen> {
                                       style: TextStyle(color: Colors.redAccent),
                                     ),
                                     content: Text(
-                                        "Are you sure want to delete task ${office.office_name}?"),
+                                        "Are you sure want to delete office ${office.office_name}?"),
                                     actions: <Widget>[
                                       FlatButton(
                                         child: Text("Yes"),
@@ -120,7 +129,7 @@ class _OfficeScreenState extends State<OfficeScreen> {
                                               Scaffold.of(this.context)
                                                   .showSnackBar(SnackBar(
                                                       content: Text(
-                                                          "Deleted Task Successfully")));
+                                                          "Deleted Office Successfully")));
                                             } else {
                                               setState(() {
                                                 callApi = CallApi();
@@ -128,7 +137,7 @@ class _OfficeScreenState extends State<OfficeScreen> {
                                               Scaffold.of(this.context)
                                                   .showSnackBar(SnackBar(
                                                       content: Text(
-                                                          "Unable to delete the task")));
+                                                          "Unable to delete the office")));
                                             }
                                           });
                                         },
@@ -173,7 +182,7 @@ class _OfficeScreenState extends State<OfficeScreen> {
     );
   }
 
-  Future _getTaskDetails(BuildContext context, Office office) {
+  Future _getOfficeDetails(BuildContext context, Office office) {
     return Navigator.push(
         context, MaterialPageRoute(builder: (context) => Individual(office)));
   }

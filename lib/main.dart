@@ -8,6 +8,7 @@ import 'src/ui/homepage/homescreen/assistantsscreen/assistants.dart';
 import 'src/ui/homepage/homescreen/completedtaskscreen/completed.dart';
 import 'src/ui/homepage/homescreen/mapscreen/map.dart';
 // import 'src/ui/homepage/homescreen/mapscreen/map2.dart';
+import 'src/ui/homepage/homescreen/officescreen/addOffice.dart';
 import 'src/ui/homepage/homescreen/officescreen/office.dart';
 import 'src/ui/homepage/homescreen/operatorscreen/operator.dart';
 import 'src/ui/homepage/homescreen/taskscreen/add_task_form.dart';
@@ -28,6 +29,7 @@ var routes= <String,WidgetBuilder>{
         // "/MapsDemo": (BuildContext context) => MapsDemo(),
         "/TaskDetails": (BuildContext context)=> TaskDetails(),
         "/AddTaskScreen": (BuildContext context)=> AddTaskScreen(),
+        "/AddOfficeScreen": (BuildContext context)=> AddOfficeScreen(),
 
 };
 

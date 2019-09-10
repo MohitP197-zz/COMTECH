@@ -19,34 +19,7 @@ class _TaskDetailsState extends State<TaskDetails> {
 
   @override
   Widget build(BuildContext context) {
-    //  final app = TextStyle(
-    //     color: Colors.white,
-    //     fontSize: 26.0,
-    //     fontWeight: FontWeight.bold,
-    //     fontFamily: 'Lobster');
-
-    // return Scaffold(
-    //   appBar: AppBar(
-    //     title: Text('Add Task', style: app,),
-    //     centerTitle: true,
-    //   ),
-
-    // );
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Task Details', style: app,),
-      //   centerTitle: true,
-      //   actions: <Widget>[
-      //      IconButton(
-      //           icon: Icon(Icons.add),
-      //           // onPressed: _addTask,
-      //           onPressed: (){
-      //             Navigator.pushNamed(context, "/AddTaskScreen");
-      //           },
-
-      //         )
-      //   ],
-      // ),
       body: FutureBuilder(
         future: callApi.getAssignedTask(),
         builder:
@@ -89,9 +62,6 @@ class _TaskDetailsState extends State<TaskDetails> {
                       style: Theme.of(context).textTheme.title,
                     ),
                     Text(assignedTask.description),
-                    // Text(assignedTask.latitude),
-                    // Text(assignedTask.longitude),
-                    // Text(assignedTask.longitude),
                     Text(assignedTask.category),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,

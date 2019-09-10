@@ -135,7 +135,6 @@ class _AddOfficeScreenState extends State<AddOfficeScreen> {
                           task_id: task_id,
                           user_id: user_id);
 
-                      // print(assignedTask);
                       if (widget.office == null) {
                         _apiService.createOffice(office).then((isSuccess) {
                           setState(() => _isLoading = false);
@@ -204,7 +203,7 @@ class _AddOfficeScreenState extends State<AddOfficeScreen> {
         labelText: "Office name",
         errorText: _isFieldOfficeValid == null || _isFieldOfficeValid
             ? null
-            : "Task name is required",
+            : "Office name is required",
       ),
       onChanged: (value) {
         bool isFieldValid = value.trim().isNotEmpty;
@@ -221,7 +220,7 @@ class _AddOfficeScreenState extends State<AddOfficeScreen> {
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(18.0)),
-        labelText: "Task Description",
+        labelText: "Office Description",
         errorText: _isFieldDescriptionValid == null || _isFieldDescriptionValid
             ? null
             : "Description is required",
@@ -241,10 +240,10 @@ class _AddOfficeScreenState extends State<AddOfficeScreen> {
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(18.0)),
-        labelText: "Category",
+        labelText: "Location",
         errorText: _isFieldLocationValid == null || _isFieldLocationValid
             ? null
-            : "Description is required",
+            : "Location is required",
       ),
       onChanged: (value) {
         bool isFieldValid = value.trim().isNotEmpty;
@@ -261,10 +260,10 @@ class _AddOfficeScreenState extends State<AddOfficeScreen> {
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(18.0)),
-        labelText: "Latitude",
+        labelText: "Task ID",
         errorText: _isFieldTaskIdValid == null || _isFieldTaskIdValid
             ? null
-            : "Latitude is required",
+            : "Task ID is required",
       ),
       onChanged: (value) {
         bool isFieldValid = value.trim().isNotEmpty;

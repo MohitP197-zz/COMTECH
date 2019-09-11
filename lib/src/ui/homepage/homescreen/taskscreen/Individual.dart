@@ -228,9 +228,8 @@ class _IndividualsState extends State<Individuals> {
                               setState(() {
                                 _isLoading = false;
                               });
-                              if (isSuccess) {
-                                Navigator.pop(
-                                    _scaffoldState.currentState.context);
+                              if (!isSuccess) {
+                                _taskIsCompleted(context);
                               } else {
                                 _scaffoldState.currentState
                                     .showSnackBar(SnackBar(
@@ -257,6 +256,14 @@ class _IndividualsState extends State<Individuals> {
       body: Column(
         children: <Widget>[bottomContent],
       ),
+    );
+  }
+
+  void _taskIsCompleted(BuildContext context) {
+    Navigator.pop(_scaffoldState.currentState.context);
+    Navigator.pop(context);
+    SnackBar(
+      content: Text("Task Updated Successfully"),
     );
   }
 }

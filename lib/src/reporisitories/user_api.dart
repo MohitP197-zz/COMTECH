@@ -89,6 +89,23 @@ class CallApi {
     }
   }
 
+  // Update Task
+  Future<bool> taskIsCompleted(AssignedTask data) async {
+    final response = await client.put(
+      "$baseurl/api/task/${data.id}",
+      headers: {"content-type": "application/json"},
+      body: taskIsCompletedToJson(data),
+    );
+    print(taskIsCompletedToJson(data));
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      print(response.statusCode);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   // Delete Task
   Future<bool> deleteTask(int id) async {
     final response = await client.delete(

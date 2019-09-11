@@ -44,6 +44,13 @@ class AssignedTask {
     };
   }
 
+    Map<String, dynamic> toTaskIsCompletedJson() {
+    return {
+      "status": status
+    };
+  }
+
+
   @override
   String toString() {
     return 'AssignedTask{id: $id, task_name: $task_name, description: $description, category: $category, $latitude,longitude: $longitude,status: $status, user_id: $user_id}';
@@ -60,3 +67,10 @@ String assignedTaskToJson(AssignedTask taskdata) {
   final jsonData = taskdata.toJson();
   return json.encode(jsonData);
 }
+
+String taskIsCompletedToJson(AssignedTask taskdata) {
+  final jsonData = taskdata.toTaskIsCompletedJson();
+  return json.encode(jsonData);
+}
+
+

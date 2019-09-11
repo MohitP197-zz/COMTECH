@@ -1,9 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:gdgbloc/src/reporisitories/user_api.dart';
 import 'package:gdgbloc/src/ui/homepage/homescreen/taskscreen/model/task_model.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 // import 'package:gdgbloc/src/ui/homepage/homescreen/taskscreen/model/task_model.dart';
+final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
 
 class Individuals extends StatefulWidget {
   final AssignedTask assignedTask;
@@ -21,6 +24,8 @@ class Individuals extends StatefulWidget {
 class _IndividualsState extends State<Individuals> {
   final AssignedTask assignedTask;
   Completer<GoogleMapController> _controller = Completer();
+  bool _isLoading = false;
+  CallApi _apiService = CallApi();
 
   // var latitude = assignedTask.latitude as double;
   // var longitude = assignedTask.longitude as double;
@@ -186,8 +191,68 @@ class _IndividualsState extends State<Individuals> {
       ),
     );
     return Scaffold(
+      key: _scaffoldState,
       appBar: AppBar(
         title: Text("Task Details"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.check),
+            // onPressed: _addTask,
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text(
+                        "Update Project",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      content: Text(
+                          "Are you sure the task ${assignedTask.task_name} is completed?"),
+                      actions: <Widget>[
+                        FlatButton(
+                          child: Text("Yes"),
+                          onPressed: () {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                            String task = "Completed";
+                            String status = task.toString();
+                            AssignedTask assignedTask =
+                                AssignedTask(status: status);
+
+                            assignedTask.id = widget.assignedTask.id;
+                            _apiService
+                                .taskIsCompleted(assignedTask)
+                                .then((isSuccess) {
+                              setState(() {
+                                _isLoading = false;
+                              });
+                              if (isSuccess) {
+                                Navigator.pop(
+                                    _scaffoldState.currentState.context);
+                              } else {
+                                _scaffoldState.currentState
+                                    .showSnackBar(SnackBar(
+                                  content: Text(
+                                      'Unable to set the task to complete'),
+                                ));
+                              }
+                            });
+                          },
+                        ),
+                        FlatButton(
+                          child: Text("No"),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        )
+                      ],
+                    );
+                  });
+            },
+          )
+        ],
       ),
       body: Column(
         children: <Widget>[bottomContent],

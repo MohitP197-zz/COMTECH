@@ -119,7 +119,7 @@ class _OfficeScreenState extends State<OfficeScreen> {
                                         onPressed: () {
                                           Navigator.pop(context);
                                           callApi
-                                              .deleteTask(office.id)
+                                              .deleteOffice(office.id)
                                               .then((isSuccess) {
                                             if (!isSuccess) {
                                               setState(() {

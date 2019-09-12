@@ -60,7 +60,7 @@ class _IndividualsState extends State<Individuals> {
     double longitudes = longitude + .0;
 
     Color determineColor() {
-      if (assignedTask.status == "Not Complete") {
+      if (assignedTask.status == "Not-Complete") {
         return Colors.red;
       } else {
         return Colors.green;

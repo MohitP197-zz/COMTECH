@@ -8,8 +8,7 @@ class Individual extends StatefulWidget {
 
   Individual(this.office);
   @override
-  _IndividualState createState() =>
-      _IndividualState(office);
+  _IndividualState createState() => _IndividualState(office);
 }
 
 class _IndividualState extends State<Individual> {
@@ -55,6 +54,13 @@ class _IndividualState extends State<Individual> {
                         border: Border.all(color: Colors.black),
                         borderRadius: BorderRadius.circular(5.0),
                       ),
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 10.0),
+                        child: Text(
+                          office.location,
+                          style: TextStyle(color: Colors.blue),
+                        ),
+                      ),
                     )))
           ],
         ),
@@ -79,7 +85,6 @@ class _IndividualState extends State<Individual> {
         ),
       ],
     );
-   
 
     final bottomContentText = Text(
       office.description,
@@ -123,13 +128,12 @@ class _IndividualState extends State<Individual> {
     );
     return Scaffold(
       appBar: AppBar(
-        title: Text("Task Details"),
+        title: Text("Office Details"),
+        centerTitle: true,
       ),
       body: Column(
         children: <Widget>[bottomContent],
       ),
     );
   }
-
- 
 }

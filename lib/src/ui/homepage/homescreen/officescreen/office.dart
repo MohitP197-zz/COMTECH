@@ -29,7 +29,7 @@ class _OfficeScreenState extends State<OfficeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Office Details',
+          'All Offices',
           style: app,
         ),
         centerTitle: true,

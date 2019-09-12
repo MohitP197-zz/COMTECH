@@ -62,7 +62,7 @@ class _HomeItemState extends State<HomeItem> {
           decoration: BoxDecoration(color: Colors.transparent),
           child: new InkWell(
             onTap: () {
-              if (id == 1 && s == 'operator') {
+              if (id == 1 ) {
                 Navigator.pushNamed(context, '/TaskScreenss');
               } else if (id == 2) {
                 // print('oli');

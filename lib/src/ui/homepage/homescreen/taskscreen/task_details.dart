@@ -48,108 +48,115 @@ class _TaskDetailsState extends State<TaskDetails> {
       child: ListView.builder(
         itemBuilder: (context, index) {
           AssignedTask assignedTask = assignedtask[index];
-          return Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: Card(
-              elevation: 8.0,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      assignedTask.task_name,
-                      style: Theme.of(context).textTheme.title,
-                    ),
-                    Text(assignedTask.description),
-                    Text(assignedTask.category),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        FlatButton(
-                          onPressed: () {
-                            _getTaskDetails(context, assignedTask);
-                          },
-                          child: Text(
-                            "View",
-                            style: TextStyle(color: Colors.blue),
+          if (assignedtask[index].status == "Not-Complete") {
+            return Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Card(
+                elevation: 8.0,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        assignedTask.task_name,
+                        style: Theme.of(context).textTheme.title,
+                      ),
+                      Text(assignedTask.description),
+                      Text(assignedTask.category),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          FlatButton(
+                            onPressed: () {
+                              _getTaskDetails(context, assignedTask);
+                            },
+                            child: Text(
+                              "View",
+                              style: TextStyle(color: Colors.blue),
+                            ),
                           ),
-                        ),
-                        FlatButton(
-                          onPressed: () {
-                            showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    title: Text(
-                                      "Warning",
-                                      style: TextStyle(color: Colors.redAccent),
-                                    ),
-                                    content: Text(
-                                        "Are you sure want to delete task ${assignedTask.task_name}?"),
-                                    actions: <Widget>[
-                                      FlatButton(
-                                        child: Text("Yes"),
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                          callApi
-                                              .deleteTask(assignedTask.id)
-                                              .then((isSuccess) {
-                                            if (!isSuccess) {
-                                              setState(() {
-                                                // super.initState();
-                                                callApi = CallApi();
-                                              });
-                                              Scaffold.of(this.context)
-                                                  .showSnackBar(SnackBar(
-                                                      content: Text(
-                                                          "Deleted Task Successfully")));
-                                            } else {
-                                              setState(() {
-                                                callApi = CallApi();
-                                              });
-                                              Scaffold.of(this.context)
-                                                  .showSnackBar(SnackBar(
-                                                      content: Text(
-                                                          "Unable to delete the task")));
-                                            }
-                                          });
-                                        },
+                          FlatButton(
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: Text(
+                                        "Warning",
+                                        style:
+                                            TextStyle(color: Colors.redAccent),
                                       ),
-                                      FlatButton(
-                                        child: Text("No"),
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                      )
-                                    ],
-                                  );
-                                });
-                          },
-                          child: Text(
-                            "Delete",
-                            style: TextStyle(color: Colors.red),
+                                      content: Text(
+                                          "Are you sure want to delete task ${assignedTask.task_name}?"),
+                                      actions: <Widget>[
+                                        FlatButton(
+                                          child: Text("Yes"),
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                            callApi
+                                                .deleteTask(assignedTask.id)
+                                                .then((isSuccess) {
+                                              if (!isSuccess) {
+                                                setState(() {
+                                                  // super.initState();
+                                                  callApi = CallApi();
+                                                });
+                                                Scaffold.of(this.context)
+                                                    .showSnackBar(SnackBar(
+                                                        content: Text(
+                                                            "Deleted Task Successfully")));
+                                              } else {
+                                                setState(() {
+                                                  callApi = CallApi();
+                                                });
+                                                Scaffold.of(this.context)
+                                                    .showSnackBar(SnackBar(
+                                                        content: Text(
+                                                            "Unable to delete the task")));
+                                              }
+                                            });
+                                          },
+                                        ),
+                                        FlatButton(
+                                          child: Text("No"),
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                        )
+                                      ],
+                                    );
+                                  });
+                            },
+                            child: Text(
+                              "Delete",
+                              style: TextStyle(color: Colors.red),
+                            ),
                           ),
-                        ),
-                        FlatButton(
-                          onPressed: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return AddTaskScreen(assignedTask: assignedTask);
-                            }));
-                          },
-                          child: Text(
-                            "Edit",
-                            style: TextStyle(color: Colors.green),
+                          FlatButton(
+                            onPressed: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return AddTaskScreen(
+                                    assignedTask: assignedTask);
+                              }));
+                            },
+                            child: Text(
+                              "Edit",
+                              style: TextStyle(color: Colors.green),
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
+            );
+          }
+          else{
+            return ListBody();
+          }
         },
         itemCount: assignedtask.length,
       ),

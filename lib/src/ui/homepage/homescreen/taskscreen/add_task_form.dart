@@ -72,7 +72,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
           ),
           centerTitle: true,
         ),
-        body: Stack(children: <Widget>[
+        body: Stack(
+          children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: ListView(

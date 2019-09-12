@@ -7,12 +7,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' show Client;
 
 class CallApi {
-  final String _loginurl = 'http://nishuflutter.herokuapp.com/api/auth/';
-  final String url = 'http://nishuflutter.herokuapp.com/api/user/';
+  final String _loginurl = 'http://oliganesh.herokuapp.com/api/auth/';
+  // final String _loginurl = 'http://10.0.2.2:8000/api/auth/';
+  final String url = 'http://oliganesh.herokuapp.com/api/user/';
+  // final String url = 'http://10.0.2.2:8000//api/user/';
   // final String baseurl = 'http://nishuflutter.herokuapp.com/';
-  final String baseurl = 'http://10.0.2.2:8000/';
+  final String baseurl = 'http://oliganesh.herokuapp.com/';
+  // final String baseurl = 'http://10.0.2.2:8000/';
+  // final String baseurl = 'http://10.0.2.2:8000/';
 
-  final String urli = 'http://nishuflutter.herokuapp.com/api/task/';
+  // final String urli = 'http://nishuflutter.herokuapp.com/api/task/';
+  final String urli = 'http://oliganesh.herokuapp.com/api/task/';
+  // final String urli = 'http://10.0.2.2:8000/api/task/';
 
   // final String urlii = 'http://nishuflutter.herokuapp.com/api/office/';
   // final String _loginurl = 'http://10.0.2.2:8000/api/auth/';
@@ -47,8 +53,8 @@ class CallApi {
 
   //Task
   Future<List<AssignedTask>> getAssignedTask() async {
-    // final response = await client.get("$baseurl/api/task");
-    final response = await client.get("http://10.0.2.2:8000/api/task");
+    final response = await client.get("$baseurl/api/task");
+    // final response = await client.get("http://10.0.2.2:8000/api/task");
     if (response.statusCode == 200) {
       return assignedTaskFromJson(response.body);
     } else {
@@ -60,7 +66,8 @@ class CallApi {
   Future<bool> createTask(AssignedTask data) async {
     print(assignedTaskToJson(data));
     final response = await client.post(
-      "http://10.0.2.2:8000/api/task",
+      // "http://10.0.2.2:8000/api/task",
+      ("$baseurl/api/task"),
       headers: {"content-type": "application/json"},
       body: assignedTaskToJson(data),
     );
@@ -134,7 +141,8 @@ class CallApi {
   Future<bool> createOffice(Office data) async {
     print(officeToJson(data));
     final response = await client.post(
-      "http://10.0.2.2:8000/api/office",
+      // "http://10.0.2.2:8000/api/office",
+      ("$baseurl/api/office"),
       headers: {"content-type": "application/json"},
       body: officeToJson(data),
     );

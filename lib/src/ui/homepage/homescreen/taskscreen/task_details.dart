@@ -48,7 +48,7 @@ class _TaskDetailsState extends State<TaskDetails> {
       child: ListView.builder(
         itemBuilder: (context, index) {
           AssignedTask assignedTask = assignedtask[index];
-          if (assignedtask[index].status == "Not-Complete") {
+          if (assignedtask[index].status == "Not Complete") {
             return Padding(
               padding: const EdgeInsets.only(top: 8.0),
               child: Card(

@@ -35,14 +35,15 @@ class LoginPage extends StatelessWidget {
           ),
           height: MediaQuery.of(context).size.height,
           padding: EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: ListView(
+            // mainAxisSize: MainAxisSize.max,
+            // mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
                 "Complain Management System",
+                textAlign: TextAlign.center,
                 style: TextStyle(
-                    color: Colors.white, fontSize: 30.0, fontFamily: 'Lobster'),
+                    color: Colors.white, fontSize: 25.0, fontFamily: 'Lobster'),
               ),
               imgfield,
               SizedBox(
@@ -72,7 +73,7 @@ class LoginPage extends StatelessWidget {
                 builder: (context, snapshot) => TextField(
                   controller: loginbloc.pascon,
                   onChanged: loginbloc.passwordChanged,
-           keyboardType: TextInputType.text,
+                  keyboardType: TextInputType.text,
                   obscureText: true,
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.lock),
@@ -101,7 +102,6 @@ class LoginPage extends StatelessWidget {
               SizedBox(
                 height: 10.0,
               ),
-              
               FlatButton(
                 child: Text(
                   'Privacy Policy',

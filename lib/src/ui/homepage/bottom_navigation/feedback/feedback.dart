@@ -45,8 +45,8 @@ class _FeedBackState extends State<FeedBack> {
         children: <Widget>[
           Padding(
             padding: EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+            child: ListView(
+              // crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 _buildTitleFieldName(),
                 SizedBox(
@@ -87,7 +87,7 @@ class _FeedBackState extends State<FeedBack> {
                       _apifeed.createFeedBack(feed).then((isSuccess) {
                         setState(() => _isLoading = false);
                         if (isSuccess) {
-                          Navigator.pop(_scaffoldState.currentState.context);
+                         Navigator.pop(_scaffoldState.currentState.context);
                         } else {
                           _scaffoldState.currentState.showSnackBar(
                             SnackBar(

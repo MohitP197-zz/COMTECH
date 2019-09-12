@@ -62,7 +62,10 @@ class _TaskDetailsState extends State<TaskDetails> {
                         assignedTask.task_name,
                         style: Theme.of(context).textTheme.title,
                       ),
-                      Text(assignedTask.description),
+                      Text(
+                        assignedTask.description,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                       Text(assignedTask.category),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -153,8 +156,7 @@ class _TaskDetailsState extends State<TaskDetails> {
                 ),
               ),
             );
-          }
-          else{
+          } else {
             return ListBody();
           }
         },

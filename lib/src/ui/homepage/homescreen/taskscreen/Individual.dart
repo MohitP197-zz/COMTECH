@@ -60,7 +60,7 @@ class _IndividualsState extends State<Individuals> {
     double longitudes = longitude + .0;
 
     Color determineColor() {
-      if (assignedTask.status == "Not-Complete") {
+      if (assignedTask.status == "Not Complete") {
         return Colors.red;
       } else {
         return Colors.green;
@@ -73,7 +73,7 @@ class _IndividualsState extends State<Individuals> {
         Text(
           assignedTask.task_name,
           textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.black, fontSize: 22.0),
+          style: TextStyle(color: Colors.black, fontSize: 10.0),
         ),
         SizedBox(
           height: 5.0,
@@ -95,7 +95,7 @@ class _IndividualsState extends State<Individuals> {
                       style: TextStyle(color: Colors.red, fontSize: 17),
                     ))),
             Expanded(
-                flex: 4,
+                flex: 5,
                 child: Padding(
                     padding: const EdgeInsets.only(left: 15.0),
                     child: Container(

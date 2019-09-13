@@ -53,7 +53,7 @@ class _AssistantsScreenState extends State<AssistantsScreen> {
         centerTitle: true,
       ),
       body: ListView.builder(
-        padding: EdgeInsets.all(16.0),
+        // padding: EdgeInsets.all(16.0),
         itemCount: data == null ? 0 : data.length,
         itemBuilder: (BuildContext context, int index) {
           if (data[index]['role'] == "office_assistant") {

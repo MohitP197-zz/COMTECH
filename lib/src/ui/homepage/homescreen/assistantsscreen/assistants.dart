@@ -57,7 +57,7 @@ class _AssistantsScreenState extends State<AssistantsScreen> {
         padding: EdgeInsets.all(16.0),
         itemCount: data == null ? 0 : data.length,
         itemBuilder: (BuildContext context, int index) {
-          if (data[index]['role'] == "office assistant") {
+          if (data[index]['role'] == "office_assistant") {
             return GestureDetector(
               child: Card(
                 elevation: 18.0,

@@ -57,35 +57,31 @@ class _AssistantsScreenState extends State<AssistantsScreen> {
         itemCount: data == null ? 0 : data.length,
         itemBuilder: (BuildContext context, int index) {
           if (data[index]['role'] == "office_assistant") {
-            return Row(
-              children: <Widget>[
-                Expanded(
+            return Row(children: <Widget>[
+              Expanded(
                   child: SizedBox(
-                    height: 60.0,
-                    child: ListView(
-                      children: <Widget>[
-                        ListTile(
-                          leading: Icon(
-                            Icons.person,
-                            size: 30.0,
-                          ),
-                          title: Text(
-                            data[index]['name'],
-                            style:
-                                TextStyle(color: Colors.black, fontSize: 20.0),
-                          ),
-                          subtitle: Text(
-                            data[index]['email'],
-                            style: TextStyle(color: Colors.green),
-                          ),
-                          trailing: Icon(Icons.keyboard_arrow_right),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            );
+                      height: 60.0,
+                      child: ListView(
+                        children: <Widget>[
+                          ListTile(
+                            leading: Icon(
+                              Icons.person,
+                              size: 30.0,
+                            ),
+                            title: Text(
+                              data[index]['name'],
+                              style: TextStyle(
+                                  color: Colors.black, fontSize: 20.0),
+                            ),
+                            subtitle: Text(
+                              data[index]['email'],
+                              style: TextStyle(color: Colors.green),
+                            ),
+                            trailing: Icon(Icons.keyboard_arrow_right),
+                          )
+                        ],
+                      )))
+            ]);
           } else {
             return ListBody();
           }

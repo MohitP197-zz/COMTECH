@@ -62,106 +62,151 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
       appBar: AppBar(
         backgroundColor: Colors.grey,
         title: new Text(
-          "Technicians Details",
+          "Technicians",
           style: ui,
         ),
         centerTitle: true,
       ),
       body: ListView.builder(
-        padding: EdgeInsets.all(16.0),
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+
+        // padding: EdgeInsets.all(16.0),
         itemCount: data == null ? 0 : data.length,
         itemBuilder: (BuildContext context, int index) {
           if (data[index]['role'] == "operator") {
-            return GestureDetector(
-              child: Card(
-                elevation: 18.0,
-                // padding: EdgeInsets.all(10.0),
-                color: index % 2 == 0 ? Colors.grey : Colors.grey,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Icon(
-                      Icons.person,
-                      size: 30.0,
-                    ),
-                    Text(
-                      data[index]['name'],
-                      style: taskui,
-                    ),
-                    SizedBox(
-                      height: 60.0,
-                    ),
-                    Text(
-                      data[index]['email'],
-                      style: taskui,
-                    ),
-                  ],
-                ),
-              ),
-              onTap: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) => Scaffold(
-                          appBar: AppBar(
-                            backgroundColor: Colors.grey,
-                            title: Text(
-                              'User Details',
-                              style: ui,
-                            ),
-                            centerTitle: true,
+            return Row(
+              children: <Widget>[
+                Expanded(
+                  child: SizedBox(
+                    height: 60.0,
+                    child: ListView(
+                      children: <Widget>[
+                        ListTile(
+                          leading: Icon(Icons.person,size: 30.0,),
+                          title: Text(
+                            data[index]['name'],
+                            style:
+                                TextStyle(color: Colors.black, fontSize: 20.0),
                           ),
-                          body: ListView.builder(
-                              padding: EdgeInsets.all(16.0),
-                              scrollDirection: Axis.vertical,
-                              itemCount: dat == null ? 0 : dat.length,
-                              itemBuilder: (BuildContext contxt, int inde) {
-                                if (data[index]['id'] == dat[inde]['user_id']) {
-                                  return Card(
-                                    // padding: EdgeInsets.all(10.0),
-                                    color: index % 2 == 0
-                                        ? Colors.grey
-                                        : Colors.grey,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Text(
-                                          dat[inde]['task_name'],
-                                          style: taskui,
+                          subtitle: Text(
+                            data[index]['email'],
+                            style: TextStyle(color: Colors.green),
+                          ),
+                          trailing: Icon(Icons.keyboard_arrow_right),
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) => Scaffold(
+                                      appBar: AppBar(
+                                        backgroundColor: Colors.grey,
+                                        title: Text(
+                                          'Technician Details',
+                                          style: ui,
                                         ),
-                                        Text(dat[inde]['description']),
-                                        Column(
-                                          children: <Widget>[
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(left: 200.0),
-                                              child: RaisedButton(
-                                                color: Colors.cyan,
-                                                child: Text(
-                                                  "$email",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 20.0,
-                                                      fontFamily: 'Railway'),
+                                        centerTitle: true,
+                                      ),
+                                      body: ListView.builder(
+                                          padding: EdgeInsets.all(16.0),
+                                          scrollDirection: Axis.vertical,
+                                          itemCount:
+                                              dat == null ? 0 : dat.length,
+                                          itemBuilder:
+                                              (BuildContext contxt, int inde) {
+                                            if (data[index]['id'] ==
+                                                dat[inde]['user_id']) {
+                                              return Card(
+                                                // padding: EdgeInsets.all(10.0),
+                                                color: index % 2 == 0
+                                                    ? Colors.grey
+                                                    : Colors.grey,
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    Text(
+                                                      dat[inde]['task_name'],
+                                                      style: taskui,
+                                                    ),
+                                                    Text(dat[inde]
+                                                        ['description']),
+                                                    Column(
+                                                      children: <Widget>[
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  left: 200.0),
+                                                          child: RaisedButton(
+                                                            color: Colors.cyan,
+                                                            child: Text(
+                                                              "$email",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      20.0,
+                                                                  fontFamily:
+                                                                      'Railway'),
+                                                            ),
+                                                            onPressed: () =>
+                                                                _service
+                                                                    .sendEmail(
+                                                                        email),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    )
+                                                  ],
                                                 ),
-                                                onPressed: () =>
-                                                    _service.sendEmail(email),
-                                              ),
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  );
-                                } else {
-                                  return ListBody();
-                                }
-                              }),
-                        ));
-              },
+                                              );
+                                            } else {
+                                              return ListBody();
+                                            }
+                                          }),
+                                    ));
+                          },
+                        ),
+                      ],
+                      // children: <Widget>[
+                      //   ListTile(
+                      //     leading: Icon(Icons.wb_sunny),
+                      //     title: Text('Sun'),
+                      //     subtitle: Text("test"),
+                      //   ),
+                      // ],
+                      // child: ListTile(
+                      //   // elevation: 18.0,
+                      //   // padding: EdgeInsets.all(10.0),
+                      //   // color: index % 2 == 0 ? Colors.grey : Colors.grey,
+                      //   child: Row(
+                      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //     crossAxisAlignment: CrossAxisAlignment.start,
+                      //     children: <Widget>[
+                      //       Icon(
+                      //         Icons.person,
+                      //         size: 30.0,
+                      //       ),
+                      //       Text(
+                      //         data[index]['name'],
+                      //         style: taskui,
+                      //       ),
+                      //       SizedBox(
+                      //         height: 60.0,
+                      //       ),
+                      //       Text(
+                      //         data[index]['email'],
+                      //         style: taskui,
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
+                    ),
+                  ),
+                ),
+              ],
             );
           } else {
             return ListBody();

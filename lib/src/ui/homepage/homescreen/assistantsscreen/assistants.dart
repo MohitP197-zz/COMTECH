@@ -14,7 +14,6 @@ class _AssistantsScreenState extends State<AssistantsScreen> {
   List data;
   List a;
 
-
   @override
   void initState() {
     super.initState();
@@ -57,38 +56,35 @@ class _AssistantsScreenState extends State<AssistantsScreen> {
         padding: EdgeInsets.all(16.0),
         itemCount: data == null ? 0 : data.length,
         itemBuilder: (BuildContext context, int index) {
-          if (data[index]['role'] == "office assistant") {
-            return GestureDetector(
-              child: Card(
-                elevation: 18.0,
-                // padding: EdgeInsets.all(10.0),
-                color: index % 2 == 0 ? Colors.white : Colors.white70,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Icon(
-                      Icons.person,
-                      size: 30.0,
+          if (data[index]['role'] == "office_assistant") {
+            return Row(
+              children: <Widget>[
+                Expanded(
+                  child: SizedBox(
+                    height: 60.0,
+                    child: ListView(
+                      children: <Widget>[
+                        ListTile(
+                          leading: Icon(
+                            Icons.person,
+                            size: 30.0,
+                          ),
+                          title: Text(
+                            data[index]['name'],
+                            style:
+                                TextStyle(color: Colors.black, fontSize: 20.0),
+                          ),
+                          subtitle: Text(
+                            data[index]['email'],
+                            style: TextStyle(color: Colors.green),
+                          ),
+                          trailing: Icon(Icons.keyboard_arrow_right),
+                        )
+                      ],
                     ),
-                    Text(
-                      data[index]['name'],
-                      style: taskui,
-                    ),
-                    SizedBox(
-                      height: 60.0,
-                    ),
-                    Text(
-                      data[index]['email'],
-                      style: taskui,
-                    ),
-                  ],
+                  ),
                 ),
-                
-              ),
-              onTap: () {
-                print('sorry');
-              },
+              ],
             );
           } else {
             return ListBody();

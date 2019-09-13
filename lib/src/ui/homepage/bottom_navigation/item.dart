@@ -62,12 +62,11 @@ class _HomeItemState extends State<HomeItem> {
           decoration: BoxDecoration(color: Colors.transparent),
           child: new InkWell(
             onTap: () {
-              if (id == 1 ) {
+              if (id == 1) {
                 Navigator.pushNamed(context, '/TaskScreenss');
               } else if (id == 2) {
                 // print('oli');
                 Navigator.pushNamed(context, '/OperatorsScreen');
-
               } else if (id == 3) {
                 Navigator.pushNamed(context, '/AssistantsScreen');
 
@@ -76,15 +75,12 @@ class _HomeItemState extends State<HomeItem> {
                 Navigator.pushNamed(context, '/OfficeScreen');
 
                 // print('thank you');
-              }else if(id == 5){
-
-              } else if(id == 6){
+              } else if (id == 5) {
+              } else if (id == 6) {
                 Navigator.pushNamed(context, '/MapsScreen');
                 // Navigator.pushNamed(context, '/MapsDemo');
 
-
-              }
-                else {
+              } else {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
@@ -111,7 +107,7 @@ class _HomeItemState extends State<HomeItem> {
               mainAxisSize: MainAxisSize.min,
               verticalDirection: VerticalDirection.down,
               children: <Widget>[
-                SizedBox(height:40.0),
+                SizedBox(height: 40.0),
                 Center(
                     child: Icon(
                   icon,
@@ -121,8 +117,10 @@ class _HomeItemState extends State<HomeItem> {
                 SizedBox(height: 14.0),
                 new Center(
                   child: new Text(title,
-                      style:
-                          new TextStyle(fontSize: 16.0, color: Colors.black, fontWeight: FontWeight.bold)),
+                      style: new TextStyle(
+                          fontSize: 16.0,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold)),
                 )
               ],
             ),

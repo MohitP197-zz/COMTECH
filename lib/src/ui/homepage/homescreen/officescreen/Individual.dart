@@ -18,21 +18,24 @@ class _IndividualState extends State<Individual> {
   @override
   Widget build(BuildContext context) {
     final topContentText = Column(
-      // crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
-          office.office_name,
-          textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.black, fontSize: 22.0),
-        ),
-        SizedBox(
-          height: 5.0,
+        SizedBox(height: 50.0),
+        Icon(
+          Icons.home,
+          color: Colors.white,
+          size: 40.0,
         ),
         Container(
           width: 90.0,
-          child: Divider(color: Colors.green),
+          child: new Divider(color: Colors.green),
         ),
-        // SizedBox(height: 10.0),
+        SizedBox(height: 10.0),
+        Text(
+          office.office_name,
+          style: TextStyle(color: Colors.white, fontSize: 22.0),
+        ),
+        SizedBox(height: 10.0),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
@@ -41,27 +44,9 @@ class _IndividualState extends State<Individual> {
                 child: Padding(
                     padding: EdgeInsets.only(left: 1.0),
                     child: Text(
-                      office.user_id.toString(),
+                      office.location,
                       style: TextStyle(color: Colors.red, fontSize: 17),
                     ))),
-            Expanded(
-                flex: 4,
-                child: Padding(
-                    padding: const EdgeInsets.only(left: 15.0),
-                    child: Container(
-                      padding: const EdgeInsets.all(7.0),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black),
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.only(left: 10.0),
-                        child: Text(
-                          office.location,
-                          style: TextStyle(color: Colors.blue),
-                        ),
-                      ),
-                    )))
           ],
         ),
       ],
@@ -69,70 +54,52 @@ class _IndividualState extends State<Individual> {
 
     final topContent = Stack(
       children: <Widget>[
+        // Container(
+        //     padding: EdgeInsets.only(left: 10.0),
+        //     height: MediaQuery.of(context).size.height * 0.5,
+        //     decoration: new BoxDecoration(
+        //       image: new DecorationImage(
+        //         image: new AssetImage("drive-steering-wheel.jpg"),
+        //         fit: BoxFit.cover,
+        //       ),
+        //     )),
         Container(
-          height: 40.0,
+          height: MediaQuery.of(context).size.height * 0.5,
+          padding: EdgeInsets.all(40.0),
           width: MediaQuery.of(context).size.width,
-          child: Divider(color: Colors.black),
-        ),
-        Container(
-          height: MediaQuery.of(context).size.height * 0.23,
-          padding: EdgeInsets.all(30.0),
-          width: MediaQuery.of(context).size.width,
-          // decoration: BoxDecoration(color: Color.fromRGBO(58, 66, 86, .9)),
+          decoration: BoxDecoration(color: Color.fromRGBO(58, 66, 86, .9)),
           child: Center(
             child: topContentText,
           ),
         ),
+        Positioned(
+          left: 8.0,
+          top: 60.0,
+          child: InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(Icons.arrow_back, color: Colors.white),
+          ),
+        )
       ],
     );
-
     final bottomContentText = Text(
       office.description,
       style: TextStyle(fontSize: 18.0),
     );
     final bottomContent = Container(
-      // width: MediaQuery.of(context).size.width * 1.0,
-      width: MediaQuery.of(context).size.width * 1.0,
-      // padding: EdgeInsets.all(1.0),
+      width: MediaQuery.of(context).size.width,
+      padding: EdgeInsets.all(40.0),
       child: Center(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              SizedBox(
-                height: 15.0,
-              ),
-              topContent,
-              Text(
-                "Details",
-                style: TextStyle(fontSize: 20.0, color: Colors.blue),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 15.0),
-                child: Container(
-                    width: 60.0,
-                    height: 5.0,
-                    decoration: BoxDecoration(
-                      border: Border(bottom: BorderSide(width: 0.5)),
-                    )),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Container(child: bottomContentText),
-            ],
-          ),
+        child: Column(
+          children: <Widget>[bottomContentText],
         ),
       ),
     );
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Office Details"),
-        centerTitle: true,
-      ),
       body: Column(
-        children: <Widget>[bottomContent],
+        children: <Widget>[topContent, bottomContent],
       ),
     );
   }

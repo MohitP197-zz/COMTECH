@@ -70,8 +70,7 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
       body: ListView.builder(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
-
-        // padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(10.0),
         itemCount: data == null ? 0 : data.length,
         itemBuilder: (BuildContext context, int index) {
           if (data[index]['role'] == "operator") {
@@ -83,7 +82,10 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
                     child: ListView(
                       children: <Widget>[
                         ListTile(
-                          leading: Icon(Icons.person,size: 30.0,),
+                          leading: Icon(
+                            Icons.person,
+                            size: 30.0,
+                          ),
                           title: Text(
                             data[index]['name'],
                             style:
@@ -101,66 +103,95 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
                                       appBar: AppBar(
                                         backgroundColor: Colors.grey,
                                         title: Text(
-                                          'Technician Details',
+                                          'Tasks of ${data[index]['name']}',
                                           style: ui,
                                         ),
                                         centerTitle: true,
                                       ),
                                       body: ListView.builder(
-                                          padding: EdgeInsets.all(16.0),
                                           scrollDirection: Axis.vertical,
+                                          shrinkWrap: true,
+                                          padding: EdgeInsets.all(16.0),
                                           itemCount:
                                               dat == null ? 0 : dat.length,
                                           itemBuilder:
                                               (BuildContext contxt, int inde) {
                                             if (data[index]['id'] ==
                                                 dat[inde]['user_id']) {
-                                              return Card(
+                                              return Row(
                                                 // padding: EdgeInsets.all(10.0),
-                                                color: index % 2 == 0
-                                                    ? Colors.grey
-                                                    : Colors.grey,
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: <Widget>[
-                                                    Text(
-                                                      dat[inde]['task_name'],
-                                                      style: taskui,
-                                                    ),
-                                                    Text(dat[inde]
-                                                        ['description']),
-                                                    Column(
-                                                      children: <Widget>[
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  left: 200.0),
-                                                          child: RaisedButton(
-                                                            color: Colors.cyan,
-                                                            child: Text(
-                                                              "$email",
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontSize:
-                                                                      20.0,
-                                                                  fontFamily:
-                                                                      'Railway'),
-                                                            ),
-                                                            onPressed: () =>
+
+                                                children: <Widget>[
+                                                  Expanded(
+                                                    child: SizedBox(
+                                                      height: 60.0,
+                                                      child: ListView(
+                                                        children: <Widget>[
+                                                          ListTile(
+                                                              leading: Icon(
+                                                                Icons
+                                                                    .track_changes,
+                                                                size: 30.0,
+                                                              ),
+                                                              title: Text(
+                                                                  dat[inde]
+                                                                      [
+                                                                      'task_name'],
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          20.0)),
+                                                              subtitle: Text(
+                                                                dat[inde]
+                                                                    ['status'],
+                                                                style: TextStyle(
+                                                                    color: dat[inde]['status'] ==
+                                                                            "Not Complete"
+                                                                        ? Colors
+                                                                            .red
+                                                                        : Colors
+                                                                            .blue),
+                                                              ),
+                                                              trailing: Icon(Icons
+                                                                  .keyboard_arrow_right),
+                                                              onTap: () {
                                                                 _service
                                                                     .sendEmail(
-                                                                        email),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    )
-                                                  ],
-                                                ),
+                                                                        email);
+                                                              }),
+                                                          // Text(dat[inde]
+                                                          //     ['description']),
+                                                          Column(
+                                                            children: <Widget>[
+                                                              Padding(
+                                                                padding: EdgeInsets
+                                                                    .only(
+                                                                        left:
+                                                                            200.0),
+                                                                child:
+                                                                    RaisedButton(
+                                                                  color: Colors
+                                                                      .cyan,
+                                                                  child: Text(
+                                                                    "$email",
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .black,
+                                                                        fontSize:
+                                                                            20.0,
+                                                                        fontFamily:
+                                                                            'Railway'),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
                                               );
                                             } else {
                                               return ListBody();

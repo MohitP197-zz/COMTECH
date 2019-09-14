@@ -40,20 +40,20 @@ class _AssistantsScreenState extends State<AssistantsScreen> {
         fontWeight: FontWeight.bold,
         fontFamily: 'Lobster');
 
-    final taskui = TextStyle(
-        color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.bold);
+    // final taskui = TextStyle(
+    //     color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.bold);
 
     return Scaffold(
       appBar: AppBar(
         title: new Text(
-          "Office Assistant Details",
+          "Office Assistants",
           style: ui,
         ),
         backgroundColor: Colors.grey,
         centerTitle: true,
       ),
       body: ListView.builder(
-        // padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(10.0),
         itemCount: data == null ? 0 : data.length,
         itemBuilder: (BuildContext context, int index) {
           if (data[index]['role'] == "office_assistant") {

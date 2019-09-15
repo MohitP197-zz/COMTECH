@@ -35,7 +35,6 @@ dependencies:
   # animated_text_kit:
 
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -46,7 +45,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter_icons:
-  image_path: "" 
+  image_path: "images/comtech.png" 
   android: true
   ios: true
 

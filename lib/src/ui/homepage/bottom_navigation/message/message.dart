@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gdgbloc/src/ui/homepage/homescreen/drawer/drawer.dart';
 
 import 'messageDesign.dart';
@@ -13,8 +14,8 @@ class Message extends StatefulWidget {
 class _MessageState extends State<Message> {
   final CallsAndMessagesService _service = locator<CallsAndMessagesService>();
 
-  final String number = "9868634359";
-  final String email = "ganesholi109@gmail.com";
+  final String number = "01-4427221 / 4439116";
+  final String email = "info@comtechnepal.com";
   final String url = "www.comtechnepal.com";
   final String address = "Putalisadak, Kathmandu,Nepal";
 
@@ -85,7 +86,7 @@ class _MessageState extends State<Message> {
               ),
               MessageDesign(
                 text: address,
-                icon: Icons.location_city,
+                icon: FontAwesomeIcons.mapMarkerAlt
               ),
             ],
           ),

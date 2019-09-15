@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gdgbloc/src/reporisitories/user_api.dart';
 import 'package:gdgbloc/src/ui/homepage/bottom_navigation/message/service/calls_and_messages_service.dart';
 import 'package:gdgbloc/src/ui/homepage/bottom_navigation/message/service/service_locator.dart';
@@ -129,8 +130,8 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
                                                         children: <Widget>[
                                                           ListTile(
                                                               leading: Icon(
-                                                                Icons
-                                                                    .track_changes,
+                                                                FontAwesomeIcons
+                                                                    .tasks,
                                                                 size: 30.0,
                                                               ),
                                                               title: Text(

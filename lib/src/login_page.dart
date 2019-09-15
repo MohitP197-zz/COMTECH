@@ -18,7 +18,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final imgfield = Image.asset(
-      'images/logo/logo1.jpg',
+      'assets/images/logo1.jpg',
       width: 300.0,
       fit: BoxFit.cover,
     );

@@ -73,7 +73,7 @@ class _IndividualsState extends State<Individuals> {
         Text(
           assignedTask.task_name,
           textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.black, fontSize: 10.0),
+          style: TextStyle(color: Colors.black, fontSize: 20.0),
         ),
         SizedBox(
           height: 5.0,

@@ -86,7 +86,7 @@ class _IndividualState extends State<Individual> {
     );
     final bottomContentText = Text(
       office.description,
-      style: TextStyle(fontSize: 18.0),
+      style: TextStyle(fontSize: 20.0),
     );
     final bottomContent = Container(
       width: MediaQuery.of(context).size.width,
@@ -98,8 +98,11 @@ class _IndividualState extends State<Individual> {
       ),
     );
     return Scaffold(
-      body: Column(
-        children: <Widget>[topContent, bottomContent],
+      resizeToAvoidBottomInset: false,
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[topContent, bottomContent],
+        ),
       ),
     );
   }

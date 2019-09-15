@@ -84,7 +84,7 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
                       children: <Widget>[
                         ListTile(
                           leading: Icon(
-                            Icons.person,
+                            FontAwesomeIcons.userCog,
                             size: 30.0,
                           ),
                           title: Text(
@@ -112,7 +112,7 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
                                       body: ListView.builder(
                                           scrollDirection: Axis.vertical,
                                           shrinkWrap: true,
-                                          padding: EdgeInsets.all(13.0),
+                                          padding: EdgeInsets.all(10.0),
                                           itemCount:
                                               dat == null ? 0 : dat.length,
                                           itemBuilder:
@@ -141,7 +141,7 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
                                                                     color: Colors
                                                                         .black,
                                                                     fontSize:
-                                                                        20.0),
+                                                                        18.0),
                                                                 overflow:
                                                                     TextOverflow
                                                                         .ellipsis,

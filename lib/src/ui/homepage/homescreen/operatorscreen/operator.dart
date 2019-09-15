@@ -112,7 +112,7 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
                                       body: ListView.builder(
                                           scrollDirection: Axis.vertical,
                                           shrinkWrap: true,
-                                          padding: EdgeInsets.all(16.0),
+                                          padding: EdgeInsets.all(13.0),
                                           itemCount:
                                               dat == null ? 0 : dat.length,
                                           itemBuilder:
@@ -135,14 +135,17 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
                                                                 size: 30.0,
                                                               ),
                                                               title: Text(
-                                                                  dat[inde]
-                                                                      [
-                                                                      'task_name'],
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .black,
-                                                                      fontSize:
-                                                                          20.0)),
+                                                                dat[inde][
+                                                                    'task_name'],
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontSize:
+                                                                        20.0),
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .ellipsis,
+                                                              ),
                                                               subtitle: Text(
                                                                 dat[inde]
                                                                     ['status'],

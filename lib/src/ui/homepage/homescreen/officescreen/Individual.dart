@@ -81,7 +81,7 @@ class _IndividualState extends State<Individual> {
     );
     final bottomContent = Container(
       width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.all(40.0),
+      padding: EdgeInsets.all(35.0),
       child: Center(
         child: Column(
           children: <Widget>[bottomContentText],

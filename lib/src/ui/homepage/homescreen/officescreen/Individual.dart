@@ -54,15 +54,6 @@ class _IndividualState extends State<Individual> {
 
     final topContent = Stack(
       children: <Widget>[
-        // Container(
-        //     padding: EdgeInsets.only(left: 10.0),
-        //     height: MediaQuery.of(context).size.height * 0.5,
-        //     decoration: new BoxDecoration(
-        //       image: new DecorationImage(
-        //         image: new AssetImage("drive-steering-wheel.jpg"),
-        //         fit: BoxFit.cover,
-        //       ),
-        //     )),
         Container(
           height: MediaQuery.of(context).size.height * 0.5,
           padding: EdgeInsets.all(40.0),

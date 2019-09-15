@@ -87,8 +87,26 @@ class _OfficeScreenState extends State<OfficeScreen> {
                       office.office_name,
                       style: Theme.of(context).textTheme.title,
                     ),
-                    Text(office.description),
-                    Text(office.location),
+                    Text(
+                      office.description,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(height: 10.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Expanded(
+                            flex: 7,
+                            child: Padding(
+                                padding: EdgeInsets.only(left: 1.0),
+                                child: Text(
+                                  office.location,
+                                  style: TextStyle(
+                                      color: Colors.red, fontSize: 16),
+                                ))),
+                        // Expanded(flex: 4, child: Text(office.location))
+                      ],
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[

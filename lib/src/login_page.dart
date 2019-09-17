@@ -1,10 +1,25 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'bloc/bloc_user.dart';
 import 'ui/homepage/home_page.dart';
 
 final loginbloc = Bloc();
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _MyLoginPage createState() => _MyLoginPage();
+}
+
+class _MyLoginPage extends State<LoginPage>
+    with SingleTickerProviderStateMixin {
+  bool _isPressed = false;
+  int _state = 0;
+  double _width = double.infinity;
+  Animation _animation;
+  GlobalKey _globalKey = GlobalKey();
+  bool _isButtonDisabled = false;
+
   changeThePage(BuildContext context) async {
     int bloclogin = await loginbloc.userCheck();
     if (bloclogin == 0) {
@@ -18,14 +33,16 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final imgfield = Image.asset(
-      'assets/images/logo1.jpg',
+      'assets/images/comtech.png',
       width: 300.0,
+      height: 250,
       fit: BoxFit.cover,
     );
 
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
+          key: _globalKey,
           // color: Colors.white,
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -40,12 +57,14 @@ class LoginPage extends StatelessWidget {
             // mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                "Complain Management System",
+                "COMTECH",
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: Colors.white, fontSize: 25.0, fontFamily: 'Lobster'),
+                style: TextStyle(color: Colors.white, fontSize: 30.0),
               ),
-              imgfield,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(child: imgfield),
+              ),
               SizedBox(
                 height: 20.0,
               ),
@@ -91,11 +110,18 @@ class LoginPage extends StatelessWidget {
               StreamBuilder<bool>(
                 stream: loginbloc.submitCheck,
                 builder: (context, snapshot) => RaisedButton(
+                  color: _state == 2 ? Colors.green : Colors.blue,
                   elevation: 12.0,
-                  color: Colors.tealAccent,
-                  onPressed:
-                      snapshot.hasData ? () => changeThePage(context) : null,
-                  child: Text("Login"),
+                  onPressed: () {
+                    snapshot.hasData ? changeThePage(context) : null;
+                    setState(() {
+                      _isPressed = _isPressed;
+                      if (_state == 0) {
+                        animateButton();
+                      }
+                    });
+                  },
+                  child: buildButtonChild(),
                 ),
                 // ),
               ),
@@ -117,5 +143,48 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void animateButton() {
+    double initialWidth = _globalKey.currentContext.size.width;
+
+    var controller =
+        AnimationController(duration: Duration(milliseconds: 300), vsync: this);
+
+    _animation = Tween(begin: 0.0, end: 1.0).animate(controller)
+      ..addListener(() {
+        setState(() {
+          _width = initialWidth - ((initialWidth - 48.0) * _animation.value);
+        });
+      });
+
+    controller.forward();
+
+    setState(() {
+      _state = 1;
+    });
+    Timer(Duration(milliseconds: 3300), () {
+      setState(() {
+        _state = 2;
+      });
+    });
+  }
+
+  Widget buildButtonChild() {
+    if (_state == 0) {
+      return Text(
+        "Login",
+        style: TextStyle(color: Colors.white, fontSize: 16.0),
+      );
+    } else if (_state == 1) {
+      return SizedBox(
+          height: 34.0,
+          width: 36.0,
+          child: CircularProgressIndicator(
+              value: null,
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.white)));
+    } else {
+      return Icon(Icons.check, color: Colors.white);
+    }
   }
 }

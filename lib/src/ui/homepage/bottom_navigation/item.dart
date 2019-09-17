@@ -56,13 +56,13 @@ class _HomeItemState extends State<HomeItem> {
 
   Card makeDashboardItem(int id, String title, IconData icon) {
     return Card(
-        elevation: 80.0,
+        elevation: 10.0,
         margin: new EdgeInsets.all(16.0),
         child: Container(
           decoration: BoxDecoration(color: Colors.transparent),
           child: new InkWell(
             onTap: () {
-              if (id == 1) {
+              if (id == 1 && (s == "admin" || s == "office_assistant")) {
                 Navigator.pushNamed(context, '/TaskScreenss');
               } else if (id == 2) {
                 // print('oli');

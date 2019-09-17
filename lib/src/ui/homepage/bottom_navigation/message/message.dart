@@ -44,9 +44,14 @@ class _MessageState extends State<Message> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              CircleAvatar(
-                radius: 50,
-                backgroundImage: AssetImage("assets/images/comtech.png"),
+              Padding(
+                padding: const EdgeInsets.all(9.0),
+                child: Container(
+                  child: CircleAvatar(
+                    radius: 80,
+                    backgroundImage: AssetImage("assets/images/comtech.png"),
+                  ),
+                ),
               ),
               Text(
                 "COMTECH",
@@ -84,10 +89,7 @@ class _MessageState extends State<Message> {
                 icon: Icons.web,
                 onPressed: () {},
               ),
-              MessageDesign(
-                text: address,
-                icon: FontAwesomeIcons.mapMarkerAlt
-              ),
+              MessageDesign(text: address, icon: FontAwesomeIcons.mapMarkerAlt),
             ],
           ),
         ),

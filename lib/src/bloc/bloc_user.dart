@@ -16,7 +16,6 @@ class Bloc extends Object with Validators implements BaseBloc {
   Function(String) get emailChanged => _emailController.sink.add;
   Function(String) get passwordChanged => _passwordController.sink.add;
 
-
   Stream<String> get email => _emailController.stream.transform(emailValidator);
   Stream<String> get password =>
       _passwordController.stream.transform(passwordValidator);
@@ -24,14 +23,10 @@ class Bloc extends Object with Validators implements BaseBloc {
   Stream<bool> get submitCheck =>
       Observable.combineLatest2(email, password, (e, p) => true);
 
-
   //check user
-  userCheck() async{    
-    var data = {
-      'email' : emailcon.text,
-      'password': pascon.text
-    };
-    
+  userCheck() async {
+    var data = {'email': emailcon.text, 'password': pascon.text};
+
     var res = await CallApi().postData(data, 'login');
     var body = json.decode(res.body);
     // print(body);
@@ -40,28 +35,25 @@ class Bloc extends Object with Validators implements BaseBloc {
     localStorage.setString('role', body['role']);
     // var user_role = localStorage.getString('role');
     print(localStorage.getString('email'));
-    
 
-    if(body['access_token'] != null){
+    if (body['access_token'] != null) {
       SharedPreferences localStorage = await SharedPreferences.getInstance();
       localStorage.setString('token', body['access_token']);
       localStorage.setString('role', body['role']);
       localStorage.setString('name', body['name']);
       localStorage.setString('email', body['email']);
       //  getin = localStorage.getString('role');
-      
-      
+
       // print(localStorage.getString('token'));
       // print(localStorage.getString('role'));
       // print(jsonDecode(body['name']));
       // print(json.decode(res.body));
       return 0;
-    }else{
+    } else {
       return 1;
     }
   }
 
-  
   //  List userTask;
 
   // getTask() async{

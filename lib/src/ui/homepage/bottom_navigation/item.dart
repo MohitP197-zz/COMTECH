@@ -12,11 +12,14 @@ class _HomeItemState extends State<HomeItem> {
   @override
   void initState() {
     someMethod();
+    getUserID();
     super.initState();
   }
 
   final userVal = new GetValue();
+  final userId = new GetValue();
   String s;
+  String id;
 
   someMethod() {
     userVal.userCheck().then((value) {
@@ -25,6 +28,16 @@ class _HomeItemState extends State<HomeItem> {
         s = value;
       });
       return value;
+    });
+  }
+
+  getUserID() {
+    userId.userIDCheck().then((value) {
+      print(value);
+      setState(() {
+        id = value;
+      });
+      return id;
     });
   }
 
@@ -43,10 +56,16 @@ class _HomeItemState extends State<HomeItem> {
         crossAxisCount: 2,
         padding: EdgeInsets.all(10.0),
         children: <Widget>[
-          makeDashboardItem(1, "Tasks", FontAwesomeIcons.tasks),
-          makeDashboardItem(2, "Technician", FontAwesomeIcons.userShield),
-          makeDashboardItem(3, "Assistant", FontAwesomeIcons.userAstronaut),
-          makeDashboardItem(4, "Office", FontAwesomeIcons.solidBuilding),
+          if (s == "admin" || s == "office_assistant")
+            makeDashboardItem(1, "Tasks", FontAwesomeIcons.tasks),
+          if (s == "admin" || s == "office_assistant")
+            makeDashboardItem(2, "Technician", FontAwesomeIcons.userShield),
+          if (s == "admin" || s == "office_assistant")
+            makeDashboardItem(3, "Assistant", FontAwesomeIcons.userAstronaut),
+          if (s == "admin" || s == "office_assistant")
+            makeDashboardItem(4, "Office", FontAwesomeIcons.solidBuilding),
+          if (s == "technician")
+            makeDashboardItem(5, "My Tasks", FontAwesomeIcons.tasks),
           // makeDashboardItem(5, "FeedBack", FontAwesomeIcons.comment),
           // makeDashboardItem(6, "Maps", FontAwesomeIcons.mapMarkedAlt),
         ],
@@ -75,7 +94,8 @@ class _HomeItemState extends State<HomeItem> {
                 Navigator.pushNamed(context, '/OfficeScreen');
 
                 // print('thank you');
-              } else if (id == 5) {
+              } else if (id == 5 && s == "technician") {
+                Navigator.pushNamed(context, '/IndividualTask');
               } else if (id == 6) {
                 Navigator.pushNamed(context, '/MapsScreen');
                 // Navigator.pushNamed(context, '/MapsDemo');

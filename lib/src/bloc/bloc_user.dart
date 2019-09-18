@@ -29,17 +29,20 @@ class Bloc extends Object with Validators implements BaseBloc {
 
     var res = await CallApi().postData(data, 'login');
     var body = json.decode(res.body);
-    // print(body);
+    print(body);
 
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     localStorage.setString('role', body['role']);
+    localStorage.setString('id', body['id'].toString());
     // var user_role = localStorage.getString('role');
     print(localStorage.getString('email'));
+    print(localStorage.getString('id'));
 
     if (body['access_token'] != null) {
       SharedPreferences localStorage = await SharedPreferences.getInstance();
       localStorage.setString('token', body['access_token']);
       localStorage.setString('role', body['role']);
+      localStorage.setString('id', body['id'].toString());
       localStorage.setString('name', body['name']);
       localStorage.setString('email', body['email']);
       //  getin = localStorage.getString('role');

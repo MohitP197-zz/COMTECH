@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'bloc/bloc_user.dart';
 import 'ui/homepage/home_page.dart';
 
@@ -191,9 +192,9 @@ class _MyLoginPage extends State<LoginPage>
           width: 36.0,
           child: CircularProgressIndicator(
               value: null,
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white)));
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.red)));
     } else {
-      return Icon(Icons.check, color: Colors.white);
+      return Icon(FontAwesomeIcons.times, color: Colors.white);
     }
   }
 }

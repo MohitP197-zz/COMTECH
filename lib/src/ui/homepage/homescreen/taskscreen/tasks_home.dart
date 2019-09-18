@@ -22,10 +22,10 @@ class _TaskScreenssState extends State<TaskScreenss> {
 
   getRole() {
     userRole.userCheck().then((value) {
-      print(value);
+      // print(value);
       setState(() {
         s = value;
-        print(s);
+        // print(s);
       });
       return value;
     });
@@ -53,7 +53,7 @@ class _TaskScreenssState extends State<TaskScreenss> {
             centerTitle: true,
             actions: <Widget>[
               IconButton(
-                icon: Icon(Icons.person),
+                icon: Icon(Icons.add),
                 // onPressed: _addTask,
                 onPressed: () {
                   Navigator.pushNamed(context, "/AddTaskScreen");

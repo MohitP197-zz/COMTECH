@@ -72,8 +72,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
           ),
           centerTitle: true,
         ),
-        body: Stack(
-          children: <Widget>[
+        body: Stack(children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: ListView(
@@ -131,8 +130,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       String category = _controllerCategory.text.toString();
                       String latitude = _controllerLatitude.text.toString();
                       String longitude = _controllerLongitude.text.toString();
-                      int user_id =
-                          int.parse(_controllerUserId.text.toString());
+                      int user_id = int.parse(_controllerUserId.text);
 
                       AssignedTask assignedTask = AssignedTask(
                           task_name: task_name,

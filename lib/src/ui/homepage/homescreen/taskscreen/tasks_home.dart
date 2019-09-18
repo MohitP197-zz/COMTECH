@@ -18,13 +18,14 @@ class _TaskScreenssState extends State<TaskScreenss> {
   }
 
   final userRole = new GetValue();
-  String s;
+  String role;
 
   getRole() {
     userRole.userCheck().then((value) {
       // print(value);
       setState(() {
-        s = value;
+        role = value;
+        print(role);
         // print(s);
       });
       return value;
@@ -52,13 +53,14 @@ class _TaskScreenssState extends State<TaskScreenss> {
             ),
             centerTitle: true,
             actions: <Widget>[
-              IconButton(
-                icon: Icon(Icons.add),
-                // onPressed: _addTask,
-                onPressed: () {
-                  Navigator.pushNamed(context, "/AddTaskScreen");
-                },
-              )
+              if (role == "admin")
+                IconButton(
+                  icon: Icon(Icons.add),
+                  // onPressed: _addTask,
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/AddTaskScreen");
+                  },
+                )
             ],
             bottom: TabBar(
               tabs: <Widget>[

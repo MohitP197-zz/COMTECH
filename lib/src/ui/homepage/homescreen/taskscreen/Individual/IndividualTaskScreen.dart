@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gdgbloc/src/bloc/getValue.dart';
 import 'package:gdgbloc/src/ui/homepage/homescreen/drawer/drawer.dart';
 import 'package:gdgbloc/src/ui/homepage/homescreen/taskscreen/Individual/CompletedTasks.dart';
 import 'package:gdgbloc/src/ui/homepage/homescreen/taskscreen/Individual/InCompleteTasks.dart';
@@ -10,6 +11,27 @@ class IndividualTaskScreen extends StatefulWidget {
 }
 
 class _IndividualTaskScreenState extends State<IndividualTaskScreen> {
+  @override
+  void initState() {
+    getRole();
+    super.initState();
+  }
+
+  final userRole = new GetValue();
+  String role;
+
+  getRole() {
+    userRole.userCheck().then((value) {
+      // print(value);
+      setState(() {
+        role = value;
+        print(role);
+        // print(s);
+      });
+      return value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final app = TextStyle(
@@ -30,15 +52,6 @@ class _IndividualTaskScreenState extends State<IndividualTaskScreen> {
               style: app,
             ),
             centerTitle: true,
-            actions: <Widget>[
-              IconButton(
-                icon: Icon(Icons.add),
-                // onPressed: _addTask,
-                onPressed: () {
-                  Navigator.pushNamed(context, "/AddTaskScreen");
-                },
-              )
-            ],
             bottom: TabBar(
               tabs: <Widget>[
                 Tab(

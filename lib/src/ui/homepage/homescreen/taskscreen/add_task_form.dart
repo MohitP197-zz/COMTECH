@@ -17,7 +17,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   CallApi _apiService = CallApi();
   bool _isFieldTaskValid;
   bool _isFieldDescriptionValid;
-  bool _isFieldCategoryValid;
+  // String _isFieldCategoryValid;
   bool _isFieldLatitudeValid;
   bool _isFieldLongitudeValid;
   bool _isFieldUserIdValid;
@@ -29,6 +29,15 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   TextEditingController _controllerLongitude = TextEditingController();
   TextEditingController _controllerUserId = TextEditingController();
 
+  var _categories = [
+    'Security Camera',
+    'Video Recorder',
+    'Attendance System',
+    'EPABX',
+    'Fire Fighting'
+  ];
+  var _currentItemSelected = 'Security Camera';
+
   @override
   void initState() {
     if (widget.assignedTask != null) {
@@ -38,7 +47,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       _isFieldDescriptionValid = true;
       _controllerDescription.text = widget.assignedTask.description;
 
-      _isFieldCategoryValid = true;
+      // _isFieldCategoryValid = true;
       _controllerCategory.text = widget.assignedTask.category;
 
       _isFieldLatitudeValid = true;
@@ -79,6 +88,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               // mainAxisSize: MainAxisSize.min,
               // crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
+                _categoryLabel(),
+                _buildTextFieldCategory(),
                 _buildTextFieldTask(),
                 SizedBox(
                   height: 8.0,
@@ -87,7 +98,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 SizedBox(
                   height: 8.0,
                 ),
-                _buildTextFieldCategory(),
                 SizedBox(
                   height: 8.0,
                 ),
@@ -104,15 +114,17 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   padding: const EdgeInsets.only(top: 8.0),
                   child: RaisedButton(
                     onPressed: () {
+                      print(_currentItemSelected);
+
                       if (_isFieldTaskValid == null ||
                           _isFieldDescriptionValid == null ||
-                          _isFieldCategoryValid == null ||
+                          // _isFieldCategoryValid == null ||
                           _isFieldLatitudeValid == null ||
                           _isFieldLongitudeValid == null ||
                           _isFieldUserIdValid == null ||
                           !_isFieldTaskValid ||
                           !_isFieldDescriptionValid ||
-                          !_isFieldCategoryValid ||
+                          // !_isFieldCategoryValid ||
                           !_isFieldLatitudeValid ||
                           !_isFieldLongitudeValid ||
                           !_isFieldUserIdValid) {
@@ -127,7 +139,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       String task_name = _controllerTask.text.toString();
                       String description =
                           _controllerDescription.text.toString();
-                      String category = _controllerCategory.text.toString();
+                      String category = _currentItemSelected;
                       String latitude = _controllerLatitude.text.toString();
                       String longitude = _controllerLongitude.text.toString();
                       int user_id = int.parse(_controllerUserId.text);
@@ -200,6 +212,14 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
         ]));
   }
 
+  Widget _categoryLabel() => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          "Category:",
+          style: TextStyle(fontSize: 20.0),
+        ),
+      );
+
   Widget _buildTextFieldTask() {
     return TextField(
       controller: _controllerTask,
@@ -241,22 +261,36 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   }
 
   Widget _buildTextFieldCategory() {
-    return TextField(
-      controller: _controllerCategory,
-      keyboardType: TextInputType.text,
-      decoration: InputDecoration(
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(18.0)),
-        labelText: "Category",
-        errorText: _isFieldCategoryValid == null || _isFieldCategoryValid
-            ? null
-            : "Description is required",
+    return Container(
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 8.0, left: 5.0),
+        child: Column(
+          children: <Widget>[
+            DropdownButton<String>(
+              // Map function gets the value as a string in a iteration for each list
+              items: _categories.map((String dropDownStringItem) {
+                return DropdownMenuItem<String>(
+                  value: dropDownStringItem,
+                  child: Text(dropDownStringItem),
+                );
+              }).toList(),
+              onChanged: (String newValueSelected) {
+                setState(() {
+                  this._currentItemSelected = newValueSelected;
+                  // _isFieldCategoryValid = _isFieldCategoryValid;
+                });
+              },
+
+              value: _currentItemSelected,
+              isExpanded: false,
+              hint: Text(
+                'Choose Category',
+                style: TextStyle(color: Color(0xFF11b719)),
+              ),
+            ),
+          ],
+        ),
       ),
-      onChanged: (value) {
-        bool isFieldValid = value.trim().isNotEmpty;
-        if (isFieldValid != _isFieldCategoryValid) {
-          setState(() => _isFieldCategoryValid = isFieldValid);
-        }
-      },
     );
   }
 

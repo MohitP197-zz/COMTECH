@@ -56,17 +56,23 @@ class _MyLoginPage extends State<LoginPage>
             // mainAxisSize: MainAxisSize.max,
             // mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
-                "COMTECH",
-                textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.white, fontSize: 30.0),
-              ),
+              // Text(
+              //   "COMTECH",
+              //   textAlign: TextAlign.center,
+              //   style: TextStyle(color: Colors.white, fontSize: 30.0),
+              // ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(child: imgfield),
+                padding: const EdgeInsets.only(top: 50),
+                // child: Container(child: imgfield),
+                child: Container(
+                    child: Text(
+                  "COMTECH NEPAL",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.white, fontSize: 30.0),
+                )),
               ),
               SizedBox(
-                height: 20.0,
+                height: MediaQuery.of(context).size.height * 0.1,
               ),
               StreamBuilder<String>(
                 stream: loginbloc.email,
@@ -105,7 +111,7 @@ class _MyLoginPage extends State<LoginPage>
                 ),
               ),
               SizedBox(
-                height: 20.0,
+                height: 30.0,
               ),
               StreamBuilder<bool>(
                 stream: loginbloc.submitCheck,
@@ -172,9 +178,12 @@ class _MyLoginPage extends State<LoginPage>
 
   Widget buildButtonChild() {
     if (_state == 0) {
-      return Text(
-        "Login",
-        style: TextStyle(color: Colors.white, fontSize: 16.0),
+      return Padding(
+        padding: const EdgeInsets.all(15),
+        child: Text(
+          "Login",
+          style: TextStyle(color: Colors.white, fontSize: 20.0),
+        ),
       );
     } else if (_state == 1) {
       return SizedBox(

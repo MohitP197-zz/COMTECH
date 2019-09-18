@@ -45,7 +45,7 @@ class _BottomBarState extends State<BottomBar> {
          ),
          new BottomNavigationBarItem(
            icon: Icon(FontAwesomeIcons.comment, color: Colors.black,size: 30.0,),
-           title: Text('FeedBack', style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),)
+           title: Text('Query', style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),)
          )
        ],
      ),

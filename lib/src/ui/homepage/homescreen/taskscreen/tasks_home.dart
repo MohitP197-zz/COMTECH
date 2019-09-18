@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gdgbloc/src/bloc/getValue.dart';
 import 'package:gdgbloc/src/ui/homepage/homescreen/drawer/drawer.dart';
 import 'package:gdgbloc/src/ui/homepage/homescreen/taskscreen/completed.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -11,14 +12,33 @@ class TaskScreenss extends StatefulWidget {
 
 class _TaskScreenssState extends State<TaskScreenss> {
   @override
+  void initState() {
+    getRole();
+    super.initState();
+  }
+
+  final userRole = new GetValue();
+  String s;
+
+  getRole() {
+    userRole.userCheck().then((value) {
+      print(value);
+      setState(() {
+        s = value;
+        print(s);
+      });
+      return value;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    
     final app = TextStyle(
         color: Colors.white,
         fontSize: 26.0,
         fontWeight: FontWeight.bold,
         fontFamily: 'Lobster');
-        
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: DefaultTabController(
@@ -26,22 +46,28 @@ class _TaskScreenssState extends State<TaskScreenss> {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.grey,
-            title: Text('Task Details', style: app,),
+            title: Text(
+              'Task Details',
+              style: app,
+            ),
             centerTitle: true,
             actions: <Widget>[
               IconButton(
-                icon: Icon(Icons.add),
+                icon: Icon(Icons.person),
                 // onPressed: _addTask,
-                onPressed: (){
+                onPressed: () {
                   Navigator.pushNamed(context, "/AddTaskScreen");
                 },
-
               )
             ],
             bottom: TabBar(
               tabs: <Widget>[
-                Tab(icon: Icon(FontAwesomeIcons.tasks),),
-                Tab(icon: Icon(FontAwesomeIcons.tablet),),
+                Tab(
+                  icon: Icon(FontAwesomeIcons.tasks),
+                ),
+                Tab(
+                  icon: Icon(FontAwesomeIcons.tablet),
+                ),
               ],
             ),
             // title: Text('Flutter'),
@@ -55,7 +81,6 @@ class _TaskScreenssState extends State<TaskScreenss> {
             ],
           ),
         ),
-
       ),
     );
   }

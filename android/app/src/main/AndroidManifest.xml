@@ -17,9 +17,6 @@
         android:label="Comtech"
         android:icon="@mipmap/ic_launcher">
 
-        <meta-data android:name="com.google.android.geo.API_KEY"
-               android:value="AIzaSyBGadpHGoKV8gJsNuETiIpaHmOMp7HuBj8"/>
-
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

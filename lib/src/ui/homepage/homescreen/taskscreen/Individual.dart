@@ -1,9 +1,6 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:gdgbloc/src/reporisitories/user_api.dart';
 import 'package:gdgbloc/src/ui/homepage/homescreen/taskscreen/model/task_model.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 // import 'package:gdgbloc/src/ui/homepage/homescreen/taskscreen/model/task_model.dart';
 final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
@@ -23,79 +20,62 @@ class Individuals extends StatefulWidget {
 
 class _IndividualsState extends State<Individuals> {
   final AssignedTask assignedTask;
-  Completer<GoogleMapController> _controller = Completer();
   bool _isLoading = false;
   CallApi _apiService = CallApi();
-
-  // var latitude = assignedTask.latitude as double;
-  // var longitude = assignedTask.longitude as double;
-  // final LatLng _center = LatLng(latitude, longitude);
-  List<Marker> allMarkers = [];
-  GoogleMapController mapController;
-  void _onMapCreated(GoogleMapController controller) {
-    _controller.complete(controller);
-  }
 
   @override
   void initState() {
     super.initState();
-    allMarkers.add(Marker(
-        markerId: MarkerId('myMarker'),
-        // draggable: true,
-        onTap: () {
-          print('Marker Tapped');
-        },
-        position: LatLng(double.parse(assignedTask.latitude),
-            double.parse(assignedTask.longitude))));
   }
 
   _IndividualsState({this.assignedTask});
   @override
   Widget build(BuildContext context) {
-    var latitude = double.parse(assignedTask.latitude);
-    var longitude = double.parse(assignedTask.longitude);
-    // double latitudes = latitude.toDouble();
-    // double longitudes = longitude.toDouble();
-    double latitudes = latitude + .0;
-    double longitudes = longitude + .0;
-
     Color determineColor() {
       if (assignedTask.status == "Not Complete") {
-        return Colors.red;
+        return Colors.brown;
       } else {
-        return Colors.green;
+        return Colors.white;
       }
     }
 
     final topContentText = Column(
-      // crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
-          assignedTask.task_name,
-          textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.black, fontSize: 20.0),
-        ),
-        SizedBox(
-          height: 5.0,
+        SizedBox(height: 1.0),
+        Icon(
+          Icons.bookmark,
+          color: Colors.white,
+          size: 40.0,
         ),
         Container(
           width: 90.0,
-          child: Divider(color: Colors.green),
+          child: new Divider(color: Colors.green),
         ),
-        // SizedBox(height: 10.0),
+        SizedBox(height: 10.0),
+        Text(
+          assignedTask.task_name,
+          style: TextStyle(color: Colors.white, fontSize: 20.0),
+        ),
+        SizedBox(
+          height: 10.0,
+        ),
+        SizedBox(
+          height: 10.0,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Expanded(
                 flex: 8,
                 child: Padding(
-                    padding: EdgeInsets.only(right: 1.0),
+                    padding: EdgeInsets.only(left: 1.0),
                     child: Text(
-                      assignedTask.user_id.toString(),
-                      style: TextStyle(color: Colors.red, fontSize: 17),
+                      assignedTask.location,
+                      style: TextStyle(color: Colors.white, fontSize: 17),
                     ))),
             Expanded(
-                flex: 5,
+                flex: 7,
                 child: Padding(
                     padding: const EdgeInsets.only(left: 15.0),
                     child: Container(
@@ -120,34 +100,29 @@ class _IndividualsState extends State<Individuals> {
     final topContent = Stack(
       children: <Widget>[
         Container(
-          height: 40.0,
+          height: MediaQuery.of(context).size.height * 0.5,
+          padding: EdgeInsets.all(40.0),
           width: MediaQuery.of(context).size.width,
-          child: Divider(color: Colors.black),
-        ),
-        Container(
-          height: MediaQuery.of(context).size.height * 0.23,
-          padding: EdgeInsets.all(30.0),
-          width: MediaQuery.of(context).size.width,
-          // decoration: BoxDecoration(color: Color.fromRGBO(58, 66, 86, .9)),
+          decoration: BoxDecoration(color: Colors.lightGreen),
           child: Center(
             child: topContentText,
           ),
         ),
       ],
     );
-    final bottomContentMap = Container(
-      // height: MediaQuery.of(context).size.height * 0.5,
-      height: MediaQuery.of(context).size.height * 0.3,
-      width: MediaQuery.of(context).size.width,
-      child: GoogleMap(
-        onMapCreated: _onMapCreated,
-        markers: Set.from(allMarkers),
-        initialCameraPosition: CameraPosition(
-          target: LatLng(latitudes, longitudes),
-          zoom: 16.0,
-        ),
-      ),
-    );
+    // final bottomContentMap = Container(
+    //   // height: MediaQuery.of(context).size.height * 0.5,
+    //   height: MediaQuery.of(context).size.height * 0.3,
+    //   width: MediaQuery.of(context).size.width,
+    //   child: GoogleMap(
+    //     onMapCreated: _onMapCreated,
+    //     markers: Set.from(allMarkers),
+    //     initialCameraPosition: CameraPosition(
+    //       target: LatLng(latitudes, longitudes),
+    //       zoom: 16.0,
+    //     ),
+    //   ),
+    // );
 
     final bottomContentText = Text(
       assignedTask.description,
@@ -157,43 +132,19 @@ class _IndividualsState extends State<Individuals> {
       // width: MediaQuery.of(context).size.width * 1.0,
       width: MediaQuery.of(context).size.width * 1.0,
       // padding: EdgeInsets.all(1.0),
+      padding: EdgeInsets.all(40.0),
       child: Center(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              bottomContentMap,
-              SizedBox(
-                height: 15.0,
-              ),
-              topContent,
-              Text(
-                "Details",
-                style: TextStyle(fontSize: 20.0, color: Colors.blue),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 15.0),
-                child: Container(
-                    width: 60.0,
-                    height: 5.0,
-                    decoration: BoxDecoration(
-                      border: Border(bottom: BorderSide(width: 0.5)),
-                    )),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Container(child: bottomContentText),
-            ],
-          ),
+        child: Column(
+          children: <Widget>[bottomContentText],
         ),
       ),
     );
     return Scaffold(
       key: _scaffoldState,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text("Task Details"),
+        backgroundColor: Colors.lightGreen,
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.check),
@@ -205,13 +156,16 @@ class _IndividualsState extends State<Individuals> {
                     return AlertDialog(
                       title: Text(
                         "Update Project",
-                        style: TextStyle(color: Colors.blue),
+                        style: TextStyle(color: Colors.lightGreen),
                       ),
                       content: Text(
                           "Are you sure the task ${assignedTask.task_name} is completed?"),
                       actions: <Widget>[
                         FlatButton(
-                          child: Text("Yes"),
+                          child: Text(
+                            "Yes",
+                            style: TextStyle(color: Colors.lightGreen),
+                          ),
                           onPressed: () {
                             setState(() {
                               _isLoading = true;
@@ -241,7 +195,10 @@ class _IndividualsState extends State<Individuals> {
                           },
                         ),
                         FlatButton(
-                          child: Text("No"),
+                          child: Text(
+                            "No",
+                            style: TextStyle(color: Colors.redAccent),
+                          ),
                           onPressed: () {
                             Navigator.pop(context);
                           },
@@ -253,8 +210,10 @@ class _IndividualsState extends State<Individuals> {
           )
         ],
       ),
-      body: Column(
-        children: <Widget>[bottomContent],
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[topContent, bottomContent],
+        ),
       ),
     );
   }

@@ -45,7 +45,7 @@ class _IndividualState extends State<Individual> {
                     padding: EdgeInsets.only(left: 1.0),
                     child: Text(
                       office.location,
-                      style: TextStyle(color: Colors.red, fontSize: 17),
+                      style: TextStyle(color: Colors.white, fontSize: 17),
                     ))),
           ],
         ),
@@ -58,7 +58,7 @@ class _IndividualState extends State<Individual> {
           height: MediaQuery.of(context).size.height * 0.5,
           padding: EdgeInsets.all(40.0),
           width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(color: Color.fromRGBO(58, 66, 86, .9)),
+          decoration: BoxDecoration(color: Colors.lightGreen),
           child: Center(
             child: topContentText,
           ),

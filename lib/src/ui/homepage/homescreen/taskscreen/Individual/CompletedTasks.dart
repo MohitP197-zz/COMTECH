@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gdgbloc/src/bloc/getValue.dart';
 import 'package:gdgbloc/src/reporisitories/user_api.dart';
 import 'package:gdgbloc/src/ui/homepage/homescreen/taskscreen/Individual.dart';
-import 'package:gdgbloc/src/ui/homepage/homescreen/taskscreen/add_task_form.dart';
+// import 'package:gdgbloc/src/ui/homepage/homescreen/taskscreen/add_task_form.dart';
 import 'package:gdgbloc/src/ui/homepage/homescreen/taskscreen/model/task_model.dart';
 
 class CompletedTasks extends StatefulWidget {
@@ -90,76 +90,6 @@ class _CompletedTasksState extends State<CompletedTasks> {
                             child: Text(
                               "View",
                               style: TextStyle(color: Colors.blue),
-                            ),
-                          ),
-                          FlatButton(
-                            onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertDialog(
-                                      title: Text(
-                                        "Warning",
-                                        style:
-                                            TextStyle(color: Colors.redAccent),
-                                      ),
-                                      content: Text(
-                                          "Are you sure want to delete task ${assignedTask.task_name}?"),
-                                      actions: <Widget>[
-                                        FlatButton(
-                                          child: Text("Yes"),
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                            callApi
-                                                .deleteTask(assignedTask.id)
-                                                .then((isSuccess) {
-                                              if (!isSuccess) {
-                                                setState(() {
-                                                  // super.initState();
-                                                  callApi = CallApi();
-                                                });
-                                                Scaffold.of(this.context)
-                                                    .showSnackBar(SnackBar(
-                                                        content: Text(
-                                                            "Deleted Task Successfully")));
-                                              } else {
-                                                setState(() {
-                                                  callApi = CallApi();
-                                                });
-                                                Scaffold.of(this.context)
-                                                    .showSnackBar(SnackBar(
-                                                        content: Text(
-                                                            "Unable to delete the task")));
-                                              }
-                                            });
-                                          },
-                                        ),
-                                        FlatButton(
-                                          child: Text("No"),
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                        )
-                                      ],
-                                    );
-                                  });
-                            },
-                            child: Text(
-                              "Delete",
-                              style: TextStyle(color: Colors.red),
-                            ),
-                          ),
-                          FlatButton(
-                            onPressed: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return AddTaskScreen(
-                                    assignedTask: assignedTask);
-                              }));
-                            },
-                            child: Text(
-                              "Edit",
-                              style: TextStyle(color: Colors.green),
                             ),
                           ),
                         ],

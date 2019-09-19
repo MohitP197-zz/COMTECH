@@ -21,15 +21,13 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   bool _isFieldTaskValid;
   bool _isFieldDescriptionValid;
   // String _isFieldCategoryValid;
-  bool _isFieldLatitudeValid;
-  bool _isFieldLongitudeValid;
+  bool _isFieldLocationValid;
   // bool _isFieldUserIdValid;
 
   TextEditingController _controllerTask = TextEditingController();
   TextEditingController _controllerDescription = TextEditingController();
   TextEditingController _controllerCategory = TextEditingController();
-  TextEditingController _controllerLatitude = TextEditingController();
-  TextEditingController _controllerLongitude = TextEditingController();
+  TextEditingController _controllerLocation = TextEditingController();
   TextEditingController _controllerUserId = TextEditingController();
 
   var _categories = [
@@ -82,11 +80,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       // _isFieldCategoryValid = true;
       _controllerCategory.text = widget.assignedTask.category;
 
-      _isFieldLatitudeValid = true;
-      _controllerLatitude.text = widget.assignedTask.latitude;
-
-      _isFieldLongitudeValid = true;
-      _controllerLongitude.text = widget.assignedTask.longitude;
+      _isFieldLocationValid = true;
+      _controllerLocation.text = widget.assignedTask.location;
 
       // _isFieldUserIdValid = true;
       _controllerUserId.text = widget.assignedTask.user_id;
@@ -135,11 +130,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 SizedBox(
                   height: 8.0,
                 ),
-                _buildTextFieldLatitude(),
-                SizedBox(
-                  height: 8.0,
-                ),
-                _buildTextFieldLongitude(),
+                _buildTextFieldLocation(),
                 SizedBox(
                   height: 8.0,
                 ),
@@ -154,15 +145,13 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       if (_isFieldTaskValid == null ||
                           _isFieldDescriptionValid == null ||
                           // _isFieldCategoryValid == null ||
-                          _isFieldLatitudeValid == null ||
-                          _isFieldLongitudeValid == null ||
+                          _isFieldLocationValid == null ||
                           // _isFieldUserIdValid == null ||
                           !_isFieldTaskValid ||
                           !_isFieldDescriptionValid ||
                           // !_isFieldCategoryValid ||
-                          !_isFieldLatitudeValid ||
                           // !_isFieldUserIdValid ||
-                          !_isFieldLongitudeValid) {
+                          !_isFieldLocationValid) {
                         _scaffoldState.currentState.showSnackBar(
                           SnackBar(
                             content: Text("Please fill all field"),
@@ -175,16 +164,14 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       String description =
                           _controllerDescription.text.toString();
                       String category = _currentSelectedCategory;
-                      String latitude = _controllerLatitude.text.toString();
-                      String longitude = _controllerLongitude.text.toString();
+                      String location = _controllerLocation.text.toString();
                       String user_id = _currentlySelectedTechnician;
 
                       AssignedTask assignedTask = AssignedTask(
                           task_name: task_name,
                           description: description,
                           category: category,
-                          latitude: latitude,
-                          longitude: longitude,
+                          location: location,
                           user_id: user_id);
 
                       // print(assignedTask);
@@ -337,41 +324,21 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     );
   }
 
-  Widget _buildTextFieldLatitude() {
+  Widget _buildTextFieldLocation() {
     return TextField(
-      controller: _controllerLatitude,
+      controller: _controllerLocation,
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(18.0)),
-        labelText: "Latitude",
-        errorText: _isFieldLatitudeValid == null || _isFieldLatitudeValid
+        labelText: "Location",
+        errorText: _isFieldLocationValid == null || _isFieldLocationValid
             ? null
-            : "Latitude is required",
+            : "Location is Required",
       ),
       onChanged: (value) {
         bool isFieldValid = value.trim().isNotEmpty;
-        if (isFieldValid != _isFieldLatitudeValid) {
-          setState(() => _isFieldLatitudeValid = isFieldValid);
-        }
-      },
-    );
-  }
-
-  Widget _buildTextFieldLongitude() {
-    return TextField(
-      controller: _controllerLongitude,
-      keyboardType: TextInputType.text,
-      decoration: InputDecoration(
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(18.0)),
-        labelText: "Longitude",
-        errorText: _isFieldLongitudeValid == null || _isFieldLongitudeValid
-            ? null
-            : "Longitude is Required",
-      ),
-      onChanged: (value) {
-        bool isFieldValid = value.trim().isNotEmpty;
-        if (isFieldValid != _isFieldLongitudeValid) {
-          setState(() => _isFieldLongitudeValid = isFieldValid);
+        if (isFieldValid != _isFieldLocationValid) {
+          setState(() => _isFieldLocationValid = isFieldValid);
         }
       },
     );

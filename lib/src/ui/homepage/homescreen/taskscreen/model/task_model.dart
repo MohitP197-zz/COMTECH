@@ -5,8 +5,7 @@ class AssignedTask {
   String task_name;
   String description;
   String category;
-  String latitude;
-  String longitude;
+  String location;
   String status;
   String user_id;
 
@@ -15,8 +14,7 @@ class AssignedTask {
       this.task_name,
       this.description,
       this.category,
-      this.latitude,
-      this.longitude,
+      this.location,
       this.status,
       this.user_id});
 
@@ -26,8 +24,7 @@ class AssignedTask {
       task_name: map["task_name"],
       description: map["description"],
       category: map["category"],
-      latitude: map["latitude"],
-      longitude: map["longitude"],
+      location: map["location"],
       status: map["status"],
       user_id: map["user_id"],
     );
@@ -38,8 +35,7 @@ class AssignedTask {
       "task_name": task_name,
       "description": description,
       "category": category,
-      "latitude": latitude,
-      "longitude": longitude,
+      "location": location,
       "user_id": user_id
     };
   }
@@ -53,7 +49,7 @@ class AssignedTask {
 
   @override
   String toString() {
-    return 'AssignedTask{id: $id, task_name: $task_name, description: $description, category: $category, $latitude,longitude: $longitude,status: $status, user_id: $user_id}';
+    return 'AssignedTask{id: $id, task_name: $task_name, description: $description, category: $category, location: $location,status: $status, user_id: $user_id}';
   }
 }
 

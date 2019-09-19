@@ -50,7 +50,7 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
   Widget build(BuildContext context) {
     final ui = TextStyle(
         color: Colors.white,
-        fontSize: 26.0,
+        fontSize: 18.0,
         fontWeight: FontWeight.bold,
         fontFamily: 'Lobster');
 
@@ -61,7 +61,7 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.lightGreen,
         title: new Text(
           "Technicians",
           style: ui,
@@ -71,7 +71,7 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
       body: ListView.builder(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
-        padding: EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(3.0),
         itemCount: data == null ? 0 : data.length,
         itemBuilder: (BuildContext context, int index) {
           if (data[index]['role'] == "technician") {
@@ -90,11 +90,11 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
                           title: Text(
                             data[index]['name'],
                             style:
-                                TextStyle(color: Colors.black, fontSize: 20.0),
+                                TextStyle(color: Colors.black, fontSize: 15.0),
                           ),
                           subtitle: Text(
                             data[index]['email'],
-                            style: TextStyle(color: Colors.green),
+                            style: TextStyle(color: Colors.green,fontSize: 12.0),
                           ),
                           trailing: Icon(Icons.keyboard_arrow_right),
                           onTap: () {
@@ -102,7 +102,7 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
                                 context: context,
                                 builder: (BuildContext context) => Scaffold(
                                       appBar: AppBar(
-                                        backgroundColor: Colors.grey,
+                                        backgroundColor: Colors.lightGreen,
                                         title: Text(
                                           'Tasks of ${data[index]['name']}',
                                           style: ui,
@@ -112,7 +112,7 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
                                       body: ListView.builder(
                                           scrollDirection: Axis.vertical,
                                           shrinkWrap: true,
-                                          padding: EdgeInsets.all(10.0),
+                                          padding: EdgeInsets.all(3.0),
                                           itemCount:
                                               dat == null ? 0 : dat.length,
                                           itemBuilder:
@@ -133,7 +133,7 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
                                                               leading: Icon(
                                                                 FontAwesomeIcons
                                                                     .tasks,
-                                                                size: 30.0,
+                                                                size: 20.0,
                                                               ),
                                                               title: Text(
                                                                 dat[inde][

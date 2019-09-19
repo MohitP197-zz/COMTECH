@@ -46,7 +46,7 @@ class _TaskScreenssState extends State<TaskScreenss> {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.grey,
+            backgroundColor: Colors.lightGreen,
             title: Container(
               child: Text(
                 'Task Details',

@@ -19,77 +19,74 @@ class _MenuesState extends State<Menues> {
   String e;
 
   @override
-  void initState(){
+  void initState() {
     userName();
     userEmail();
     super.initState();
   }
 
-  userName(){
-    userVal.userNameCheck().then((value){
+  userName() {
+    userVal.userNameCheck().then((value) {
       print(value);
-      setState((){
+      setState(() {
         n = value;
       });
     });
   }
 
-    userEmail(){
-    userVal.userEmailCheck().then((value){
+  userEmail() {
+    userVal.userEmailCheck().then((value) {
       print(value);
-      setState((){
+      setState(() {
         e = value;
       });
     });
   }
-  
 
   final logoutBoc = Bloc();
-  void _userLogout() async{
+  void _userLogout() async {
     var res = await CallApi().getData('logout');
     var body = json.decode(res.body);
-    if(body['message'] != null){
+    if (body['message'] != null) {
       SharedPreferences localstorage = await SharedPreferences.getInstance();
       localstorage.remove('role');
       localstorage.remove('token');
 
-      Navigator.push(context, new MaterialPageRoute(
-        builder: (context)=> LoginPage()
-      ));
+      Navigator.push(
+          context, new MaterialPageRoute(builder: (context) => LoginPage()));
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
-       child: ListView(
-          children: <Widget>[
-            UserAccountsDrawerHeader(
-              accountName: Text(n),
-              accountEmail: Text(e),
-              currentAccountPicture: CircleAvatar(
-                backgroundColor:
-                    Theme.of(context).platform == TargetPlatform.iOS
-                        ? Colors.blue
-                        : Colors.white,
-                child: Text(
-                  n[0],
-                  style: TextStyle(fontSize: 40.0),
-                ),
+      child: ListView(
+        children: <Widget>[
+          UserAccountsDrawerHeader(
+            accountName: Text(n),
+            accountEmail: Text(e),
+            currentAccountPicture: CircleAvatar(
+              backgroundColor: Theme.of(context).platform == TargetPlatform.iOS
+                  ? Colors.lightGreen
+                  : Colors.white,
+              child: Text(
+                n[0],
+                style: TextStyle(fontSize: 40.0),
               ),
             ),
-            ListTile(
-              title: Text("Settings"),
-              trailing: Icon(FontAwesomeIcons.arrowRight),
-              onTap: () {},
-            ),
-            ListTile(
-              title: Text("Logout"),
-              trailing: Icon(FontAwesomeIcons.arrowRight),
-              onTap: _userLogout,
-            ),
-          ],
-        ),
-      
+          ),
+          // ListTile(
+          //   title: Text("Settings"),
+          //   trailing: Icon(FontAwesomeIcons.arrowRight),
+          //   onTap: () {},
+          // ),
+          ListTile(
+            title: Text("Logout"),
+            trailing: Icon(FontAwesomeIcons.arrowRight),
+            onTap: _userLogout,
+          ),
+        ],
+      ),
     );
   }
 }

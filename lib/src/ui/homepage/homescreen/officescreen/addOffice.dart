@@ -63,7 +63,7 @@ class _AddOfficeScreenState extends State<AddOfficeScreen> {
     return Scaffold(
         key: _scaffoldState,
         appBar: AppBar(
-          backgroundColor: Colors.grey,
+          backgroundColor: Colors.lightGreen,
           iconTheme: IconThemeData(color: Colors.white),
           title: Text(
             widget.office == null ? "Add Office" : "Edit Office Details",

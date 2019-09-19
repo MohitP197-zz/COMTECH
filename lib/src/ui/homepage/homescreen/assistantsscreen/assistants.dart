@@ -50,11 +50,11 @@ class _AssistantsScreenState extends State<AssistantsScreen> {
           "Office Assistants",
           style: ui,
         ),
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.lightGreen,
         centerTitle: true,
       ),
       body: ListView.builder(
-        padding: EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(3.0),
         itemCount: data == null ? 0 : data.length,
         itemBuilder: (BuildContext context, int index) {
           if (data[index]['role'] == "office_assistant") {
@@ -72,11 +72,11 @@ class _AssistantsScreenState extends State<AssistantsScreen> {
                             title: Text(
                               data[index]['name'],
                               style: TextStyle(
-                                  color: Colors.black, fontSize: 20.0),
+                                  color: Colors.black, fontSize: 17.0),
                             ),
                             subtitle: Text(
                               data[index]['email'],
-                              style: TextStyle(color: Colors.green),
+                              style: TextStyle(color: Colors.green,fontSize: 12.0),
                             ),
                             trailing: Icon(Icons.keyboard_arrow_right),
                           )

@@ -36,6 +36,7 @@ class _IndividualTaskScreenState extends State<IndividualTaskScreen> {
   Widget build(BuildContext context) {
     final app = TextStyle(
         color: Colors.white,
+        backgroundColor: Colors.lightGreen,
         fontSize: 26.0,
         fontWeight: FontWeight.bold,
         fontFamily: 'Lobster');
@@ -46,10 +47,10 @@ class _IndividualTaskScreenState extends State<IndividualTaskScreen> {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.grey,
+            backgroundColor: Colors.lightGreen,
             title: Text(
-              'Task Details',
-              style: app,
+              'Tasks',
+              // style: app,
             ),
             centerTitle: true,
             bottom: TabBar(

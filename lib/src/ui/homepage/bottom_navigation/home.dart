@@ -32,7 +32,7 @@ class _HomeState extends State<Home> {
         fontFamily: 'Lobster');
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.lightGreen,
         title: Text(
           'Task Management',
           style: app,

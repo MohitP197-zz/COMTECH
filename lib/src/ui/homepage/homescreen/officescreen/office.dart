@@ -28,6 +28,7 @@ class _OfficeScreenState extends State<OfficeScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.lightGreen,
         title: Text(
           'All Offices',
           style: app,

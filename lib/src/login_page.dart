@@ -33,12 +33,12 @@ class _MyLoginPage extends State<LoginPage>
 
   @override
   Widget build(BuildContext context) {
-    final imgfield = Image.asset(
-      'assets/images/comtech.png',
-      width: 300.0,
-      height: 250,
-      fit: BoxFit.cover,
-    );
+    // final imgfield = Image.asset(
+    //   'assets/images/comtech.png',
+    //   width: 300.0,
+    //   height: 250,
+    //   fit: BoxFit.cover,
+    // );
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -49,7 +49,7 @@ class _MyLoginPage extends State<LoginPage>
             gradient: LinearGradient(
                 begin: Alignment.topRight,
                 end: Alignment.bottomLeft,
-                colors: [Colors.blue, Colors.white]),
+                colors: [Colors.green, Colors.white]),
           ),
           height: MediaQuery.of(context).size.height,
           padding: EdgeInsets.all(16.0),
@@ -57,23 +57,24 @@ class _MyLoginPage extends State<LoginPage>
             // mainAxisSize: MainAxisSize.max,
             // mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              // Text(
-              //   "COMTECH",
-              //   textAlign: TextAlign.center,
-              //   style: TextStyle(color: Colors.white, fontSize: 30.0),
-              // ),
-              Padding(
-                padding: const EdgeInsets.only(top: 50),
-                // child: Container(child: imgfield),
-                child: Container(
-                    child: Text(
-                  "COMTECH NEPAL",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.white, fontSize: 30.0),
-                )),
+              ListTile(
+                title: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text("COMTECH",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.white, fontSize: 30.0)),
+                ),
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.1,
+                height: 5.0,
+              ),
+              ListTile(
+                title: Text("A Task Management App",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.yellow, fontSize: 20.0)),
+              ),
+              SizedBox(
+                height: 25.0,
               ),
               StreamBuilder<String>(
                 stream: loginbloc.email,
@@ -117,7 +118,7 @@ class _MyLoginPage extends State<LoginPage>
               StreamBuilder<bool>(
                 stream: loginbloc.submitCheck,
                 builder: (context, snapshot) => RaisedButton(
-                  color: _state == 2 ? Colors.green : Colors.blue,
+                  color: _state == 2 ? Colors.green : Colors.green,
                   elevation: 12.0,
                   onPressed: () {
                     snapshot.hasData ? changeThePage(context) : null;

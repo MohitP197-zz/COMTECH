@@ -94,6 +94,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   @override
   Widget build(BuildContext context) {
     final app = TextStyle(
+      backgroundColor: Colors.lightGreen,
         color: Colors.white,
         fontSize: 26.0,
         fontWeight: FontWeight.bold,
@@ -102,7 +103,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     return Scaffold(
         key: _scaffoldState,
         appBar: AppBar(
-          backgroundColor: Colors.grey,
+          backgroundColor: Colors.lightGreen,
           iconTheme: IconThemeData(color: Colors.white),
           title: Text(
             widget.assignedTask == null ? "Add Task" : "Edit Task Details",

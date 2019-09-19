@@ -8,7 +8,7 @@ class AssignedTask {
   String latitude;
   String longitude;
   String status;
-  int user_id;
+  String user_id;
 
   AssignedTask(
       {this.id,
@@ -62,6 +62,13 @@ List<AssignedTask> assignedTaskFromJson(String jsonData) {
   return List<AssignedTask>.from(
       taskdata.map((item) => AssignedTask.formJson(item)));
 }
+
+List<AssignedTask> technicians(String jsonData) {
+  final taskdata = json.decode(jsonData);
+  return List<AssignedTask>.from(
+      taskdata.map((item) => AssignedTask.formJson(item)));
+}
+
 
 String assignedTaskToJson(AssignedTask taskdata) {
   final jsonData = taskdata.toJson();

@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:gdgbloc/src/reporisitories/user_api.dart';
 import 'package:gdgbloc/src/ui/homepage/homescreen/taskscreen/model/task_model.dart';
+import 'package:http/http.dart' as http;
 
 final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
 
@@ -20,7 +23,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   // String _isFieldCategoryValid;
   bool _isFieldLatitudeValid;
   bool _isFieldLongitudeValid;
-  bool _isFieldUserIdValid;
+  // bool _isFieldUserIdValid;
 
   TextEditingController _controllerTask = TextEditingController();
   TextEditingController _controllerDescription = TextEditingController();
@@ -36,7 +39,36 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     'EPABX',
     'Fire Fighting'
   ];
-  var _currentItemSelected = 'Security Camera';
+  var _currentSelectedCategory = 'Security Camera';
+
+  // var _technicians = [
+  //   'Ganesh',
+  //   'Dipak',
+  //   'Parshu',
+  //   'Rabine',
+  // ];
+  // var _currentSelectedTechnician = 'Ganesh';
+  // CallApi callApi;
+
+  String _currentlySelectedTechnician;
+
+  final String url = "http://10.0.2.2:8000/api/technicians/";
+
+  List data = List(); //edited line
+
+  Future<String> getTechnicians() async {
+    var res = await http
+        .get(Uri.encodeFull(url), headers: {"Accept": "application/json"});
+    var resBody = json.decode(res.body);
+
+    setState(() {
+      data = resBody;
+    });
+
+    print(resBody);
+
+    return "Sucess";
+  }
 
   @override
   void initState() {
@@ -56,10 +88,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       _isFieldLongitudeValid = true;
       _controllerLongitude.text = widget.assignedTask.longitude;
 
-      _isFieldUserIdValid = true;
-      _controllerUserId.text = widget.assignedTask.user_id.toString();
+      // _isFieldUserIdValid = true;
+      _controllerUserId.text = widget.assignedTask.user_id;
     }
     super.initState();
+    getTechnicians();
+    // final _technicians = callApi.getTechnicians();
   }
 
   @override
@@ -109,25 +143,26 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 SizedBox(
                   height: 8.0,
                 ),
+                _TechnicianLabel(),
                 _buildTextFieldUserId(),
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: RaisedButton(
                     onPressed: () {
-                      print(_currentItemSelected);
+                      print(_currentSelectedCategory);
 
                       if (_isFieldTaskValid == null ||
                           _isFieldDescriptionValid == null ||
                           // _isFieldCategoryValid == null ||
                           _isFieldLatitudeValid == null ||
                           _isFieldLongitudeValid == null ||
-                          _isFieldUserIdValid == null ||
+                          // _isFieldUserIdValid == null ||
                           !_isFieldTaskValid ||
                           !_isFieldDescriptionValid ||
                           // !_isFieldCategoryValid ||
                           !_isFieldLatitudeValid ||
-                          !_isFieldLongitudeValid ||
-                          !_isFieldUserIdValid) {
+                          // !_isFieldUserIdValid ||
+                          !_isFieldLongitudeValid) {
                         _scaffoldState.currentState.showSnackBar(
                           SnackBar(
                             content: Text("Please fill all field"),
@@ -139,10 +174,10 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       String task_name = _controllerTask.text.toString();
                       String description =
                           _controllerDescription.text.toString();
-                      String category = _currentItemSelected;
+                      String category = _currentSelectedCategory;
                       String latitude = _controllerLatitude.text.toString();
                       String longitude = _controllerLongitude.text.toString();
-                      int user_id = int.parse(_controllerUserId.text);
+                      String user_id = _currentlySelectedTechnician;
 
                       AssignedTask assignedTask = AssignedTask(
                           task_name: task_name,
@@ -220,6 +255,14 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
         ),
       );
 
+       Widget _TechnicianLabel() => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          "Technician:",
+          style: TextStyle(fontSize: 20.0),
+        ),
+      );
+
   Widget _buildTextFieldTask() {
     return TextField(
       controller: _controllerTask,
@@ -276,12 +319,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               }).toList(),
               onChanged: (String newValueSelected) {
                 setState(() {
-                  this._currentItemSelected = newValueSelected;
+                  this._currentSelectedCategory = newValueSelected;
                   // _isFieldCategoryValid = _isFieldCategoryValid;
                 });
               },
 
-              value: _currentItemSelected,
+              value: _currentSelectedCategory,
               isExpanded: false,
               hint: Text(
                 'Choose Category',
@@ -335,22 +378,28 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   }
 
   Widget _buildTextFieldUserId() {
-    return TextField(
-      controller: _controllerUserId,
-      keyboardType: TextInputType.number,
-      decoration: InputDecoration(
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(18.0)),
-        labelText: "User Id",
-        errorText: _isFieldUserIdValid == null || _isFieldUserIdValid
-            ? null
-            : "User Id is required",
+    return Container(
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 8.0, left: 5.0),
+        child: Column(
+          children: <Widget>[
+            DropdownButton<String>(
+              items: data.map((item) {
+                return new DropdownMenuItem(
+                  child: new Text(item['name']),
+                  value: item['name'].toString(),
+                );
+              }).toList(),
+              onChanged: (newVal) {
+                setState(() {
+                  _currentlySelectedTechnician = newVal;
+                });
+              },
+              value: _currentlySelectedTechnician,
+            ),
+          ],
+        ),
       ),
-      onChanged: (value) {
-        bool isFieldValid = value.trim().isNotEmpty;
-        if (isFieldValid != _isFieldUserIdValid) {
-          setState(() => _isFieldUserIdValid = isFieldValid);
-        }
-      },
     );
   }
 }

@@ -8,24 +8,25 @@ import 'package:http/http.dart' show Client;
 
 class CallApi {
   // final String _loginurl = 'http://oliganesh.herokuapp.com/api/auth/';
-  // final String _loginurl = 'https://app.comtechnepal.com/api/auth/';
-  final String _loginurl = 'http://10.0.2.2:8000/api/auth/';
+  final String _loginurl = 'https://app.comtechnepal.com/api/auth/';
+  // final String _loginurl = 'http://10.0.2.2:8000/api/auth/';
 
-  final String tecnicians = 'http://10.0.2.2:8000/api/technicians/';
+  // final String tecnicians = 'http://10.0.2.2:8000/api/technicians/';
+  final String tecnicians = 'https://app.comtechnepal.com/api/technicians/';
   // final String _loginurl = 'http://10.0.2.2:8000/api/auth/';
   // final String url = 'http://oliganesh.herokuapp.com/api/user/';
-  final String url = 'http://10.0.2.2:8000/user/';
-  // final String url = 'https://app.comtechnepal.com/user/';
+  // final String url = 'http://10.0.2.2:8000/user/';
+  final String url = 'https://app.comtechnepal.com/api/user/';
   // final String url = 'http://10.0.2.2:8000//api/user/';
   // final String baseurl = 'http://oliganesh.herokuapp.com/';
-  final String baseurl = 'http://10.0.2.2:8000/';
-  // final String baseurl = 'https://app.comtechnepal.com/';
+  // final String baseurl = 'http://10.0.2.2:8000/';
+  final String baseurl = 'https://app.comtechnepal.com/';
   // final String baseurl = 'http://10.0.2.2:8000/';
 
   // final String urli = 'http://oliganesh.herokuapp.com/api/task/';
   // final String urli = 'http://10.0.2.2:8000/api/task/';
-  final String urli = 'http://10.0.2.2:8000/api/task/';
-  // final String urli = 'https://app.comtechnepal.com/api/task/';
+  // final String urli = 'http://10.0.2.2:8000/api/task/';
+  final String urli = 'https://app.comtechnepal.com/api/task/';
 
   Client client = Client();
 

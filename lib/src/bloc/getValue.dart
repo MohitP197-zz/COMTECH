@@ -13,7 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
     Future<String> userIDCheck() async{
       localStorage = await SharedPreferences.getInstance();
-      String userId = localStorage.getString('id').toString();
+      String userId = localStorage.getString('name').toString();
 
       return userId;
     }

@@ -52,7 +52,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
   String _currentlySelectedTechnician;
 
-  final String url = "http://10.0.2.2:8000/api/technicians/";
+  final String url = "https://app.comtechnepal.com/api/technicians/";
 
   List data = List(); //edited line
 
@@ -255,7 +255,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
         ),
       );
 
-       Widget _TechnicianLabel() => Padding(
+  Widget _TechnicianLabel() => Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
           "Technician:",

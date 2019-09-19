@@ -74,7 +74,7 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
         padding: EdgeInsets.all(10.0),
         itemCount: data == null ? 0 : data.length,
         itemBuilder: (BuildContext context, int index) {
-          if (data[index]['role'] == "operator") {
+          if (data[index]['role'] == "technician") {
             return Row(
               children: <Widget>[
                 Expanded(
@@ -117,7 +117,8 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
                                               dat == null ? 0 : dat.length,
                                           itemBuilder:
                                               (BuildContext contxt, int inde) {
-                                            if (data[index]['id'] ==
+                                            print(data[index]['name']);
+                                            if (data[index]['name'] ==
                                                 dat[inde]['user_id']) {
                                               return Row(
                                                 // padding: EdgeInsets.all(10.0),

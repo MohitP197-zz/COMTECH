@@ -87,9 +87,9 @@ class _IndividualsState extends State<Individuals> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Expanded(
-                flex: 6,
+                flex: 8,
                 child: Padding(
-                    padding: EdgeInsets.only(left: 1.0),
+                    padding: EdgeInsets.only(right: 1.0),
                     child: Text(
                       assignedTask.user_id.toString(),
                       style: TextStyle(color: Colors.red, fontSize: 17),

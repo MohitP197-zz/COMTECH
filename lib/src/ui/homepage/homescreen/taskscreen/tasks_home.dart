@@ -47,13 +47,15 @@ class _TaskScreenssState extends State<TaskScreenss> {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.grey,
-            title: Text(
-              'Task Details',
-              style: app,
+            title: Container(
+              child: Text(
+                'Task Details',
+                style: app,
+              ),
             ),
             centerTitle: true,
             actions: <Widget>[
-              if (role == "admin")
+              if (role == "admin" || role == "office_assistant")
                 IconButton(
                   icon: Icon(Icons.add),
                   // onPressed: _addTask,

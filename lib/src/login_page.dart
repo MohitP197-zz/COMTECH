@@ -25,7 +25,7 @@ class _MyLoginPage extends State<LoginPage>
     int bloclogin = await loginbloc.userCheck();
     if (bloclogin == 0) {
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => PageTwo()));
+          .pushReplacement(MaterialPageRoute(builder: (context) => PageTwo()));
     } else {
       print('you are beautiful');
     }

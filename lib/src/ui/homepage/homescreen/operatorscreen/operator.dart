@@ -94,7 +94,8 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
                           ),
                           subtitle: Text(
                             data[index]['email'],
-                            style: TextStyle(color: Colors.green,fontSize: 12.0),
+                            style:
+                                TextStyle(color: Colors.green, fontSize: 12.0),
                           ),
                           trailing: Icon(Icons.keyboard_arrow_right),
                           onTap: () {

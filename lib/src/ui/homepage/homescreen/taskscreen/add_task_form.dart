@@ -94,7 +94,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   @override
   Widget build(BuildContext context) {
     final app = TextStyle(
-      backgroundColor: Colors.lightGreen,
+        backgroundColor: Colors.lightGreen,
         color: Colors.white,
         fontSize: 26.0,
         fontWeight: FontWeight.bold,

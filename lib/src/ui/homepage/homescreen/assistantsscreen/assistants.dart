@@ -58,7 +58,8 @@ class _AssistantsScreenState extends State<AssistantsScreen> {
         itemCount: data == null ? 0 : data.length,
         itemBuilder: (BuildContext context, int index) {
           if (data[index]['role'] == "office_assistant") {
-            return Row(children: <Widget>[
+            return Row(
+              children: <Widget>[
               Expanded(
                   child: SizedBox(
                       height: 60.0,

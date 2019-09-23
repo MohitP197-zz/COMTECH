@@ -35,10 +35,10 @@ class _TaskScreenssState extends State<TaskScreenss> {
   @override
   Widget build(BuildContext context) {
     final app = TextStyle(
-        color: Colors.white,
-        fontSize: 26.0,
-        fontWeight: FontWeight.bold,
-        fontFamily: 'Lobster');
+      color: Colors.white,
+      fontSize: 25.0,
+      fontWeight: FontWeight.bold,
+    );
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -49,7 +49,7 @@ class _TaskScreenssState extends State<TaskScreenss> {
             backgroundColor: Colors.lightGreen,
             title: Container(
               child: Text(
-                'Task Details',
+                'All Tasks',
                 style: app,
               ),
             ),

@@ -55,10 +55,10 @@ class _AddOfficeScreenState extends State<AddOfficeScreen> {
   @override
   Widget build(BuildContext context) {
     final app = TextStyle(
-        color: Colors.white,
-        fontSize: 26.0,
-        fontWeight: FontWeight.bold,
-        fontFamily: 'Lobster');
+      color: Colors.white,
+      fontSize: 25.0,
+      fontWeight: FontWeight.bold,
+    );
 
     return Scaffold(
         key: _scaffoldState,
@@ -66,7 +66,7 @@ class _AddOfficeScreenState extends State<AddOfficeScreen> {
           backgroundColor: Colors.lightGreen,
           iconTheme: IconThemeData(color: Colors.white),
           title: Text(
-            widget.office == null ? "Add Office" : "Edit Office Details",
+            widget.office == null ? "Add New Office" : "Edit Office Details",
             style: app,
           ),
           centerTitle: true,
@@ -124,7 +124,8 @@ class _AddOfficeScreenState extends State<AddOfficeScreen> {
                       String description =
                           _controllerDescription.text.toString();
                       String location = _controllerLocation.text.toString();
-                      int task_id = int.parse(_controllerTaskId.text.toString());
+                      int task_id =
+                          int.parse(_controllerTaskId.text.toString());
                       int user_id =
                           int.parse(_controllerUserId.text.toString());
 

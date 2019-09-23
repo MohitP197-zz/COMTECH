@@ -26,17 +26,55 @@ class _HomeState extends State<Home> {
 // print(task);
 
     final app = TextStyle(
-        color: Colors.white,
-        fontSize: 26.0,
-        fontWeight: FontWeight.bold,
-        fontFamily: 'Lobster');
+      color: Colors.white,
+      fontSize: 25.0,
+      fontWeight: FontWeight.bold,
+    );
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.lightGreen,
-        title: Text(
-          'Task Management',
-          style: app,
-        ),
+        title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            // children: <Widget>[
+            //   Text(
+            //     'COMTECH',
+            //     style: app,
+            //   ),
+            //   Visibility(
+            //     child: Text(
+            //       "\n\n A Task Management App",
+            //       style: TextStyle(fontSize: 15.0),
+            //     ),
+            //   ),
+            // ],
+            children: <Widget>[
+              Expanded(
+                  child: SizedBox(
+                      height: 68.0,
+                      child: ListView(
+                        physics: const NeverScrollableScrollPhysics(),
+                        children: <Widget>[
+                          ListTile(
+                            title: Text(
+                              "COMTECH",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 20.0, color: Colors.white),
+                            ),
+                            subtitle: Padding(
+                              padding: const EdgeInsets.only(top: 5.0),
+                              child: Text(
+                                "A Task Management App",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 15.0, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )))
+            ]),
         centerTitle: true,
         elevation: 0.0,
         actions: <Widget>[],

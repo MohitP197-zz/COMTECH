@@ -25,19 +25,19 @@ class _FeedBackState extends State<FeedBack> {
   @override
   Widget build(BuildContext context) {
     final app = TextStyle(
-        color: Colors.white,
-        fontSize: 26.0,
-        fontWeight: FontWeight.bold,
-        fontFamily: 'Lobster');
+      color: Colors.white,
+      fontSize: 25.0,
+      fontWeight: FontWeight.bold,
+    );
 
     return Scaffold(
       key: _scaffoldState,
       appBar: AppBar(
         title: Text(
-          'Add FeedBack',
+          'Query',
           style: app,
         ),
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.lightGreen,
         centerTitle: true,
       ),
       drawer: Menues(),
@@ -82,12 +82,14 @@ class _FeedBackState extends State<FeedBack> {
                       String name = _controllerName.text.toString();
                       String description = _controllerFeedBack.text.toString();
 
-                      FeedBackModel feed =
-                          FeedBackModel(title: title, user_name: name, description: description);
+                      FeedBackModel feed = FeedBackModel(
+                          title: title,
+                          user_name: name,
+                          description: description);
                       _apifeed.createFeedBack(feed).then((isSuccess) {
                         setState(() => _isLoading = false);
                         if (isSuccess) {
-                         Navigator.pop(_scaffoldState.currentState.context);
+                          Navigator.pop(_scaffoldState.currentState.context);
                         } else {
                           _scaffoldState.currentState.showSnackBar(
                             SnackBar(

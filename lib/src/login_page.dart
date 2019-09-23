@@ -57,22 +57,32 @@ class _MyLoginPage extends State<LoginPage>
             // mainAxisSize: MainAxisSize.max,
             // mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              ListTile(
-                title: Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: Text("COMTECH",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 30.0)),
+              Padding(
+                padding: const EdgeInsets.only(top: 25.0, bottom: 30.0),
+                child: ListTile(
+                  title: Text(
+                    "COMTECH",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 40.0, color: Colors.white),
+                  ),
+                  subtitle: Text(
+                    "A Task Management App",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 15.0, color: Colors.white),
+                  ),
                 ),
               ),
               SizedBox(
-                height: 5.0,
+                height: 15.0,
               ),
-              ListTile(
-                title: Text("A Task Management App",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.yellow, fontSize: 20.0)),
-              ),
+              // ListTile(
+              //   title: Padding(
+              //     padding: const EdgeInsets.only(bottom: 30.0),
+              //     child: Text("A Task Management App",
+              //         textAlign: TextAlign.center,
+              //         style: TextStyle(color: Colors.yellow, fontSize: 20.0)),
+              //   ),
+              // ),
               SizedBox(
                 height: 25.0,
               ),

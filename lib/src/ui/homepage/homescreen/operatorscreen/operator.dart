@@ -49,10 +49,10 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
   @override
   Widget build(BuildContext context) {
     final ui = TextStyle(
-        color: Colors.white,
-        fontSize: 18.0,
-        fontWeight: FontWeight.bold,
-        fontFamily: 'Lobster');
+      color: Colors.white,
+      fontSize: 25.0,
+      fontWeight: FontWeight.bold,
+    );
 
     final taskui = TextStyle(
         color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.bold);
@@ -106,7 +106,11 @@ class _OperatorsScreenState extends State<OperatorsScreen> {
                                         backgroundColor: Colors.lightGreen,
                                         title: Text(
                                           'Tasks of ${data[index]['name']}',
-                                          style: ui,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 18.0,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
                                         centerTitle: true,
                                       ),

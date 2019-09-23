@@ -21,16 +21,16 @@ class _OfficeScreenState extends State<OfficeScreen> {
   @override
   Widget build(BuildContext context) {
     final app = TextStyle(
-        color: Colors.white,
-        fontSize: 26.0,
-        fontWeight: FontWeight.bold,
-        fontFamily: 'Lobster');
+      color: Colors.white,
+      fontSize: 26.0,
+      fontWeight: FontWeight.bold,
+    );
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.lightGreen,
         title: Text(
-          'All Offices',
+          'Offices',
           style: app,
         ),
         centerTitle: true,

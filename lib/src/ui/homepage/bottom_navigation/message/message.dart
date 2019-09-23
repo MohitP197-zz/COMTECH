@@ -22,17 +22,17 @@ class _MessageState extends State<Message> {
   @override
   Widget build(BuildContext context) {
     final app = TextStyle(
-        color: Colors.white,
-        fontSize: 26.0,
-        fontWeight: FontWeight.bold,
-        fontFamily: 'Lobster');
+      color: Colors.white,
+      fontSize: 26.0,
+      fontWeight: FontWeight.bold,
+    );
     return Scaffold(
       appBar: AppBar(
         title: Text(
           'Contact US',
           style: app,
         ),
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.lightGreen,
         centerTitle: true,
         elevation: 0.0,
       ),

@@ -36,10 +36,10 @@ class _AssistantsScreenState extends State<AssistantsScreen> {
   @override
   Widget build(BuildContext context) {
     final ui = TextStyle(
-        color: Colors.white,
-        fontSize: 26.0,
-        fontWeight: FontWeight.bold,
-        fontFamily: 'Lobster');
+      color: Colors.white,
+      fontSize: 25.0,
+      fontWeight: FontWeight.bold,
+    );
 
     // final taskui = TextStyle(
     //     color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.bold);
@@ -76,7 +76,8 @@ class _AssistantsScreenState extends State<AssistantsScreen> {
                             ),
                             subtitle: Text(
                               data[index]['email'],
-                              style: TextStyle(color: Colors.green,fontSize: 12.0),
+                              style: TextStyle(
+                                  color: Colors.green, fontSize: 12.0),
                             ),
                             trailing: Icon(Icons.keyboard_arrow_right),
                           )

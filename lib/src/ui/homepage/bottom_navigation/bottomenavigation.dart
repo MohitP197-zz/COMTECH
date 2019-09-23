@@ -41,7 +41,7 @@ class _BottomBarState extends State<BottomBar> {
          ),
          new BottomNavigationBarItem(
            icon: Icon(FontAwesomeIcons.fileContract, color: Colors.black,size: 30.0,),
-           title: Text('Message', style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),),
+           title: Text('About', style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),),
          ),
          new BottomNavigationBarItem(
            icon: Icon(FontAwesomeIcons.comment, color: Colors.black,size: 30.0,),
